@@ -15,7 +15,5 @@ public class register extends Database {
     
     public void Income(double income){
         this.income = income;
-
-        super.write(email,password,nickname, income);
     }
 }

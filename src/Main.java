@@ -1,4 +1,5 @@
 import ExpenseTracker.Database;
+import ExpenseTracker.login;
 import ExpenseTracker.menu;
 import ExpenseTracker.register;
 import java.util.*;
@@ -11,6 +12,7 @@ public class Main {
         menu menu = new menu();
         register register = new register();
         Database db = new Database();
+        login login = new login();
 
         menu.loading();
         menu.clearScreen();
@@ -43,6 +45,8 @@ public class Main {
                 System.out.print("Enter Monthly Income : ");
                 income = s.nextDouble();
                 register.Income(income);
+
+                db.write(email, password, nickname, income);
        
                 s.nextLine();
 
@@ -52,8 +56,21 @@ public class Main {
 
                 break;
             case 2:
+
+                menu.clearScreen();
+                System.out.println("Login");
+                s.nextLine();
+                System.out.print("Enter Email : ");
+                email = s.nextLine();
+                login.Email(email);
+
+                System.out.print("Enter Password : ");
+                password = s.nextLine();
+                login.Password(password);
                 
+                login.userLogin(email, password);
                 break;
+
             case 3:
                 return;
             default:
