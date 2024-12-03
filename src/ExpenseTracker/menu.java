@@ -21,7 +21,11 @@ public class menu {
 
             for (int i = 0; i <= 100; i+=2) {
               
-                System.out.print("\r" + "Loading: " + i + "%" + "\r" + "╸".repeat(i));
+                StringBuilder progress = new StringBuilder();
+                for (int j = 0; j < i; j++) {
+                    progress.append("╸");
+                }
+                System.out.print("\r" + "Loading: " + i + "%" + "\r" + progress.toString());
                 Thread.sleep(50);
             }
             System.out.println();

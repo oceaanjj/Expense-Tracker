@@ -1,8 +1,10 @@
 package ExpenseTracker;
 
 import java.util.Properties;
-import jakarta.mail.*;
-import jakarta.mail.internet.*;
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
 
 public class mail {
     public class SendEmail {
