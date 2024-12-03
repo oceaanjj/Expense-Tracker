@@ -12,8 +12,8 @@ public class Main {
         register register = new register();
         Database db = new Database();
 
-        /*menu.loading();
-        menu.clearScreen();*/
+        menu.loading();
+        menu.clearScreen();
         //try
 
         menu.termsAndConditions();

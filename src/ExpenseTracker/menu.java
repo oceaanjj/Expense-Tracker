@@ -18,15 +18,11 @@ public class menu {
 
     public void loading() {
         try {
-
-            for (int i = 0; i <= 100; i+=2) {
-              
-                StringBuilder progress = new StringBuilder();
-                for (int j = 0; j < i; j++) {
-                    progress.append("╸");
-                }
-                System.out.print("\r" + "Loading: " + i + "%" + "\r" + progress.toString());
-                Thread.sleep(50);
+            System.out.println("\t\t\t\t\t\tLoading:");
+            for (int i = 0; i <= 100; i += 2) {
+                String progress = "╸".repeat(i);
+                System.out.print("\r" + i + "%  " + progress );
+                Thread.sleep(100);
             }
             System.out.println();
         } catch (Exception e) {
