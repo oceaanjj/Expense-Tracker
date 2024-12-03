@@ -17,8 +17,6 @@ public class Main {
         menu.loading();
         menu.clearScreen();
         //try
-
-        menu.termsAndConditions();
         
         menu.mainmenu();
         System.out.print("\n   Enter choice : ");
@@ -41,6 +39,9 @@ public class Main {
                 System.out.print("Enter Nickname : ");
                 nickname = s.nextLine();
                 register.addNickname(nickname);
+
+
+                menu.termsAndConditions();
 
                 System.out.print("Enter Monthly Income : ");
                 income = s.nextDouble();

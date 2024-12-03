@@ -13,7 +13,7 @@ public class Database {
             BufferedReader read = new BufferedReader(new FileReader(email + ".txt"));
 
             if (!read.ready()) {
-                txt.write(nickname + "\n" + email + "\n" + password);
+                txt.write(email + "\n" + password + "\n" + nickname);
                 txt.close();
             }
             
@@ -26,7 +26,7 @@ public class Database {
         try {
 
             //palitan mo yung path ng folderPath sa path ng folder mo baks
-            String folderPath = "/Users/macbookpro15/Downloads/casestudy/expenses-tracker/src/ExpenseTracker/ACCOUNTS";
+            String folderPath = "C:\\Users\\csdmi\\Documents\\GitHub\\Expense-Tracker\\src\\ExpenseTracker\\ACCOUNTS";
             File folder = new File(folderPath); 
 
             if (!folder.exists()) {
@@ -40,7 +40,7 @@ public class Database {
             File file = new File(folder, email + ".txt"); 
             BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
     
-            writer.write(nickname + "\n" + email + "\n" + password + "\n" + income);
+            writer.write(email + "\n" + password + "\n" + nickname + "\n" + income);
             writer.close();
     
             System.out.println("Account created successfully !");
