@@ -54,7 +54,7 @@ public class Database {
     public ArrayList<String> readFileToArrayList(String email) {
         ArrayList<String> usertxtfile = new ArrayList<>();
         try {
-            String folderPath = "/Users/macbookpro15/Downloads/casestudy/expenses-tracker/src/ExpenseTracker/ACCOUNTS";
+            String folderPath = "C:\\Users\\csdmi\\Documents\\GitHub\\Expense-Tracker\\src\\ExpenseTracker\\ACCOUNTS";
             File file = new File(folderPath, email + ".txt");
             
             if (!file.exists()) {
