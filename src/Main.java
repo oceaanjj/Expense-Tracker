@@ -1,12 +1,10 @@
 import ExpenseTracker.Database;
-import ExpenseTracker.mail;
 import ExpenseTracker.menu;
 import ExpenseTracker.register;
 import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        mail mail = new mail();
         String email, password, nickname;
         double income;
         Scanner s = new Scanner(System.in);
@@ -16,8 +14,8 @@ public class Main {
 
         /*menu.loading();
         menu.clearScreen();*/
-        
         //try
+
         menu.termsAndConditions();
         
         menu.mainmenu();

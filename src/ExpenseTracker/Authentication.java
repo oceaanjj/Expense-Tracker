@@ -6,7 +6,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 
-public class mail {
+public class Authentication {
     public class SendEmail {
         Properties properties;
 
