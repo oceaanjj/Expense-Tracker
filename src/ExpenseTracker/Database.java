@@ -7,7 +7,7 @@ public class Database {
     String nickname, email, password;
     double income;
 
-    public void write(String email, String password) {
+    public void write(String email, String password, String nickname) {
         try {
             BufferedWriter txt = new BufferedWriter(new FileWriter(email + ".txt", true));
             BufferedReader read = new BufferedReader(new FileReader(email + ".txt"));
@@ -74,4 +74,6 @@ public class Database {
         }
         return usertxtfile;
     }
+
+
 }

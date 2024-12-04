@@ -40,20 +40,27 @@ public class Main {
                 nickname = s.nextLine();
                 register.addNickname(nickname);
 
+                    menu.termsAndConditions();
+                    System.out.print("Do you agree to the terms and conditions ? (y/n) : ");
 
-                menu.termsAndConditions();
+                    if(s.nextLine().equals("n")) {
+                    
+                        
+                        System.out.println("You must agree to the terms and conditions to proceed.");
+                    }
+                    else if(s.nextLine().equals("y")) {
+                        System.out.print("Enter Monthly Income : ");
+                        income = s.nextDouble();
+                        register.Income(income);
 
-                System.out.print("Enter Monthly Income : ");
-                income = s.nextDouble();
-                register.Income(income);
-
-                db.write(email, password, nickname, income);
+                        db.write(email, password, nickname, income);
+                        return;
+                    }
        
                 s.nextLine();
 
-                menu.termsAndConditions();
 
-                s.nextLine();
+       
 
                 break;
             case 2:
