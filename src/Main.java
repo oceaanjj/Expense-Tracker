@@ -14,9 +14,11 @@ public class Main {
         Database db = new Database();
         login login = new login();
 
-        menu.loading();
+        menu.termsAndConditions();
+
+        /**menu.loading();
         menu.clearScreen();
-        //try
+        //try*/
         
         menu.mainmenu();
         System.out.print("\n   Enter choice : ");
@@ -56,7 +58,7 @@ public class Main {
                         db.write(email, password, nickname, income);
                         return;
                     }
-       
+
                 s.nextLine();
 
 
