@@ -61,7 +61,6 @@ public class Database {
                 System.out.println("Login failed: Email not registered.");
                 return usertxtfile;
             }
-
             BufferedReader reader = new BufferedReader(new FileReader(file));
             String line;
             while ((line = reader.readLine()) != null) {
@@ -73,6 +72,14 @@ public class Database {
             e.printStackTrace();
         }
         return usertxtfile;
+    }
+
+    public void Budgeting(){
+        
+    }
+
+    public void Savings(){
+
     }
 
 
