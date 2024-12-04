@@ -10,7 +10,7 @@ public class login extends Database {
         try {
 
             //palitan mo ulit path ng folder
-            String folderPath = "/Users/macbookpro15/Downloads/casestudy/expenses-tracker/src/ExpenseTracker/ACCOUNTS";
+            String folderPath = "C:\\Users\\csdmi\\Documents\\GitHub\\Expense-Tracker\\src\\ExpenseTracker\\ACCOUNTS";
             File file = new File(folderPath, email + ".txt");
             if (!file.exists()) {
                 System.out.println("Login failed: Email not registered.");
