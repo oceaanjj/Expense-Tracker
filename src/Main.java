@@ -6,7 +6,7 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) { 
-        String email, password, nickname;
+        String email, password, nickname;  
         double income;
         Scanner s = new Scanner(System.in);
         menu menu = new menu();
@@ -44,14 +44,14 @@ public class Main {
 
                     menu.termsAndConditions();
                     System.out.print("Do you agree to the terms and conditions ? (y/n) : ");
-                    String agree = s.nextLine();
-                    if(agree.equals("n")) {
+                    char agree = s.next().charAt(0);
+                    if(agree == 'n') {
                     
                         System.out.println("You must agree to the terms and conditions to proceed.");
                     }
-                    else if(agree.equals("y")) {
+                    else if(agree == 'y') {
                         System.out.print("Enter Monthly Income : ");
-                        income = s.nextDouble();
+                        income = s.nextLong();
                         register.Income(income);    
                         System.out.println("Registration Successful");
 
