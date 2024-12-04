@@ -14,8 +14,6 @@ public class Main {
         Database db = new Database();
         login login = new login();
 
-        menu.termsAndConditions();
-
         /**menu.loading();
         menu.clearScreen();
         //try*/
@@ -27,6 +25,7 @@ public class Main {
 
 
         switch (choice) {
+            //Registration
             case 1:
                 menu.clearScreen();
                 System.out.println("Registeration");
@@ -45,17 +44,19 @@ public class Main {
 
                     menu.termsAndConditions();
                     System.out.print("Do you agree to the terms and conditions ? (y/n) : ");
-
-                    if(s.nextLine().equals("n")) {
+                    String agree = s.nextLine();
+                    if(agree.equals("n")) {
                     
                         System.out.println("You must agree to the terms and conditions to proceed.");
                     }
-                    else if(s.nextLine().equals("y")) {
+                    else if(agree.equals("y")) {
                         System.out.print("Enter Monthly Income : ");
                         income = s.nextDouble();
-                        register.Income(income);
+                        register.Income(income);    
+                        System.out.println("Registration Successful");
 
                         db.write(email, password, nickname, income);
+                
                         return;
                     }
 
@@ -65,6 +66,8 @@ public class Main {
        
 
                 break;
+
+                //Login
             case 2:
 
                 menu.clearScreen();
@@ -79,7 +82,10 @@ public class Main {
                 login.Password(password);
                 
                 login.userLogin(email, password);
+
                 break;
+
+
 
             case 3:
                 return;
