@@ -5,7 +5,7 @@ import ExpenseTracker.register;
 import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) { 
         String email, password, nickname;
         double income;
         Scanner s = new Scanner(System.in);
@@ -19,6 +19,7 @@ public class Main {
         /**menu.loading();
         menu.clearScreen();
         //try*/
+
         
         menu.mainmenu();
         System.out.print("\n   Enter choice : ");
@@ -47,7 +48,6 @@ public class Main {
 
                     if(s.nextLine().equals("n")) {
                     
-                        
                         System.out.println("You must agree to the terms and conditions to proceed.");
                     }
                     else if(s.nextLine().equals("y")) {

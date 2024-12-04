@@ -2,9 +2,10 @@ package ExpenseTracker;
 
 import java.util.*;
 
-public class menu {
+public class menu extends Date {
 
     public void mainmenu() {
+        date();
         System.out.println("╔═══════════════════════════════════════════════════════════════╗");
         System.out.println("║                                                               ║");
         System.out.println("║\t\tWelcome to Expense Tracker System               ║");
