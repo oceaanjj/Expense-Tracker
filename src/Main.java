@@ -82,10 +82,13 @@ public class Main {
                 login.Password(password);
                 
                 login.userLogin(email, password);
-
-                break;
-
-
+                boolean loginStatus = login.userLogin(email, password);
+                if (loginStatus) {
+                    //magaganap after makapaglogin
+                }
+                else {
+                    break;
+                }
 
             case 3:
                 return;

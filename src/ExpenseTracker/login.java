@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class login extends Database {
 
 
-    public void userLogin(String email, String password) {
+    public boolean userLogin(String email, String password) {
         try {
 
             //palitan mo ulit path ng folder
@@ -14,7 +14,7 @@ public class login extends Database {
             File file = new File(folderPath, email + ".txt");
             if (!file.exists()) {
                 System.out.println("Login failed: Email not registered.");
-                return;
+                return false;
             }
 
             ArrayList<String> userTxtFile = readFileToArrayList(email);
@@ -24,17 +24,22 @@ public class login extends Database {
                 String userPassword = userTxtFile.get(1); 
                         if (userEmail.equals(email) && userPassword.equals(password)) {
                             System.out.println("Login successful!");
+                            return true;
                         }
                          else {
-                            System.out.println("Login failed: Incorrect email or password.");
+                             System.out.println("Login failed: Incorrect email or password.");
+                             return false;
                         }
             } 
             else {
                 System.out.println("Login failed: Invalid file format.");
+                return false;
             }
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Login failed: Error occurred.");
+            return false;
+            
         }
     }
 
