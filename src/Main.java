@@ -17,6 +17,7 @@ public class Main {
         double income = 0.0;
         int choice = 0;
         char agree;
+        String electricityDate, waterDate, rentDate, internetDate;
 
         TermsAndConditions terms = new TermsAndConditions();
         mainmenu mainmenu = new mainmenu();
@@ -75,7 +76,7 @@ public class Main {
                                 throw new Exception();
                             }
                             else{
-                                db.setEmail(email);
+                                register.setEmail(email);
                                 break;
                             }
                         } catch (Exception e) {
@@ -87,7 +88,7 @@ public class Main {
                         try {
                             System.out.print("Enter Password: ");
                             password = s.nextLine();
-                            db.setPassword(password);
+                            register.setPassword(password);
                             break;
                         } catch (Exception e) {
                             System.out.println("Invalid input for password. Please try again.");
@@ -98,7 +99,7 @@ public class Main {
                         try {
                             System.out.print("Enter Nickname: ");
                             nickname = s.nextLine();
-                            db.setNickname(nickname);
+                            register.setNickname(nickname);
                             break;
                         } catch (Exception e) {
                             System.out.println("Invalid input for nickname. Please try again.");
@@ -130,7 +131,7 @@ public class Main {
                         try {
                             System.out.print("Enter Income: ");
                             income = Double.parseDouble(s.nextLine());
-                            db.setIncome(income);
+                            register.setIncome(income);
                             break;
                         } catch (NumberFormatException e) {
                             System.out.println("Invalid input for income. Please enter a valid number.");
@@ -139,8 +140,57 @@ public class Main {
                         }
                     }
 
-                    db.write();
-                    System.out.println("Registration successful!");
+
+                    /*utilities due dates keme */
+                    
+                    while (true) {
+                        System.out.println("ELECTRICITY");
+                        System.out.print("Enter due date (YYYY-MM-DD): ");
+                        electricityDate = s.nextLine();
+                        if (register.isCorrectdate(electricityDate)) {
+                            register.setElectricity(electricityDate);
+                            break;
+                        }
+                    }
+                    
+                
+                    while (true) {
+                        System.out.println("WATER");
+                        System.out.print("Enter due date (YYYY-MM-DD): ");
+                        waterDate = s.nextLine();
+                        if (register.isCorrectdate(waterDate)) {
+                            register.setWater(waterDate);
+                            break;
+                        }
+                    }
+                    
+                  
+                    while (true) {
+                        System.out.println("RENT");
+                        System.out.print("Enter due date (YYYY-MM-DD): ");
+                        rentDate = s.nextLine();
+                        if (register.isCorrectdate(rentDate)) {
+                            register.setRent(rentDate);
+                            break;
+                        }
+                    }
+                    
+                  
+                    while (true) {
+                        System.out.println("INTERNET");
+                        System.out.print("Enter due date (YYYY-MM-DD): ");
+                        internetDate = s.nextLine();
+                        if (register.isCorrectdate(internetDate)) {
+                            register.setInternet(internetDate);
+                            break;
+                        }
+                    }
+
+
+
+    
+                    register.write();
+                   
                     break;
 
 
