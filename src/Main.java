@@ -1,19 +1,34 @@
 import ExpenseTracker.Database;
+import ExpenseTracker.TermsAndConditions;
+import ExpenseTracker.clearScreen;
+import ExpenseTracker.loading;
 import ExpenseTracker.login;
-import ExpenseTracker.menu;
+import ExpenseTracker.mainmenu;
 import ExpenseTracker.register;
 import java.util.*;
 
 public class Main {
+    
     public static void main(String[] args) {
         String email = "", password = "", nickname = "";
         double income = 0.0;
         int choice = 0;
-        Scanner s = new Scanner(System.in);
-        menu menu = new menu();
+        char agree;
+
+        TermsAndConditions terms = new TermsAndConditions();
+        mainmenu mainmenu = new mainmenu();
+        loading load = new loading();
+        clearScreen clr = new clearScreen();
         register register = new register();
         Database db = new Database();
         login login = new login();
+
+        
+
+        Scanner s = new Scanner(System.in);
+
+        load.loading();
+        //clr.clearScreen();
 
        mainloop : while (true) { 
             //menu.mainmenu();
@@ -21,7 +36,7 @@ public class Main {
             int choice = s.nextInt();*/
 
             while (true) { 
-                menu.mainmenu();
+                mainmenu.display();
                 System.out.print("\n   Enter choice : ");
                 
                 try {
@@ -29,6 +44,7 @@ public class Main {
                     s.nextLine(); 
                 } catch (InputMismatchException e) {
                     System.out.println("Invalid choice. Please enter a valid number.");
+                    clr.clearScreen();
                     s.nextLine(); 
                     continue;
                 }
@@ -37,7 +53,7 @@ public class Main {
             switch (choice) {
                 //registration
                 case 1: 
-                    menu.clearScreen();
+                    clr.clearScreen();
                     System.out.println("Registration");
 
                     while (true) {
@@ -73,12 +89,11 @@ public class Main {
                         }
                     }
 
-                    menu.termsAndConditions();
-                    char agree;
+                    terms.display();
 
                     while (true) {
                         try {
-                            System.out.print("Do you agree to the terms and conditions? (y/n): ");
+                            System.out.print("\tDo you agree to the terms and conditions? (y/n): ");
                             agree = s.nextLine().toLowerCase().charAt(0);
                             if (agree == 'y' || agree == 'n') {
                                 break;
@@ -112,9 +127,15 @@ public class Main {
                     System.out.println("Registration successful!");
                     break;
 
+
+
+
+
+
+
                 case 2: 
                     //login
-                    menu.clearScreen();
+                    clr.clearScreen();
                     System.out.println("Login");
 
                     while (true) {
@@ -141,15 +162,19 @@ public class Main {
 
                     boolean loginStatus = login.userLogin(login.getEmail(), login.getPassword());
                     if (loginStatus) {
-                        //System.out.println("Login successful!"); nagdodouble print ng login
+                        
                        
                     } else {
-                        System.out.println("Login failed. Please check your credentials.");
+                        
                     }
                     break;
 
+
+
+
+
                 case 3: 
-                    System.out.println("Thnak you for using our application!");
+                    System.out.println("\n\tThnak you for using our application!");
                     break mainloop;
 
                 default:
