@@ -1,4 +1,3 @@
 Rain
 rain
-ulan
-9.0E11
+rainy

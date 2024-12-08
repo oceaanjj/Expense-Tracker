@@ -32,15 +32,15 @@ public class Main {
                 s.nextLine();
                 System.out.print("Enter Email : ");
                 email = s.nextLine();
-                register.addEmail(email);
+                db.setEmail(email);
 
                 System.out.print("Enter Password : ");
                 password = s.nextLine();
-                register.addPass(password);
+                db.setPassword(password);
 
                 System.out.print("Enter Nickname : ");
                 nickname = s.nextLine();
-                register.addNickname(nickname);
+                db.setNickname(nickname);
 
                     menu.termsAndConditions();
                     System.out.print("Do you agree to the terms and conditions ? (y/n) : ");
@@ -52,10 +52,9 @@ public class Main {
                     else if(agree == 'y') {
                         System.out.print("Enter Monthly Income : ");
                         income = s.nextLong();
-                        register.Income(income);    
-                        System.out.println("Registration Successful");
+                        db.setIncome(income);   
 
-                        db.write(email, password, nickname, income);
+                        db.write();
                 
                         return;
                     }
@@ -75,14 +74,16 @@ public class Main {
                 s.nextLine();
                 System.out.print("Enter Email : ");
                 email = s.nextLine();
-                login.Email(email);
+                login.setEmail(email);
+
 
                 System.out.print("Enter Password : ");
                 password = s.nextLine();
-                login.Password(password);
+                login.setPassword(password);
+
                 
-                login.userLogin(email, password);
-                boolean loginStatus = login.userLogin(email, password);
+                login.userLogin(login.getEmail(), login.getPassword());
+                boolean loginStatus = login.userLogin(login.getEmail(), login.getPassword());
                 if (loginStatus) {
                     //magaganap after makapaglogin
                 }

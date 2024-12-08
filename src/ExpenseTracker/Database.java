@@ -4,49 +4,80 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class Database {
-    String nickname, email, password;
-    double income;
+    private String nickname;
+    private String email;
+    private String password;
+    private double income;
 
-    public void write(String email, String password, String nickname) {
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public double getIncome() {
+        return income;
+    }
+
+    public void setIncome(double income) {
+        this.income = income;
+    }
+
+    /**public void write() {
         try {
-            BufferedWriter txt = new BufferedWriter(new FileWriter(email + ".txt", true));
-            BufferedReader read = new BufferedReader(new FileReader(email + ".txt"));
+            BufferedWriter txt = new BufferedWriter(new FileWriter(getEmail() + ".txt", true));
+            BufferedReader read = new BufferedReader(new FileReader(getEmail() + ".txt"));
 
             if (!read.ready()) {
-                txt.write(email + "\n" + password + "\n" + nickname);
+                txt.write(getEmail() + "\n" + getPassword() +  "\n" + getNickname());
                 txt.close();
             }
             
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }**/
+    
 
-    public void write(String email, String password, String nickname, double income) {
+    public void write() {
         try {
 
-            //palitan mo yung path ng folderPath sa path ng folder mo baks
-            String folderPath = "C:\\Users\\csdmi\\Documents\\GitHub\\Expense-Tracker\\src\\ExpenseTracker\\ACCOUNTS";
+            //palitan ng path for windows if hindi gumagana
+            String folderPath = System.getProperty("user.dir") + "/ExpenseTracker/ACCOUNTS";
             File folder = new File(folderPath); 
 
             if (!folder.exists()) {
                 boolean created = folder.mkdir(); 
                 if (!created) {
                     System.out.println("Failed to create Folder !");
-                    return; 
                 }
             }
 
-            File file = new File(folder, email + ".txt"); 
-            BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
-    
-            writer.write(email + "\n" + password + "\n" + nickname + "\n" + income);
+            BufferedWriter writer = new BufferedWriter(new FileWriter(new File(folderPath, getEmail() + ".txt"), true));
+            writer.write(getEmail() + "\n" + getPassword() +  "\n" + getNickname());
             writer.close();
     
             System.out.println("Account created successfully !");
     
-        } 
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -54,7 +85,9 @@ public class Database {
     public ArrayList<String> readFileToArrayList(String email) {
         ArrayList<String> usertxtfile = new ArrayList<>();
         try {
-            String folderPath = "C:\\Users\\csdmi\\Documents\\GitHub\\Expense-Tracker\\src\\ExpenseTracker\\ACCOUNTS";
+
+            //palitan ng path for windows if hindi gumagana
+            String folderPath = System.getProperty("user.dir") + "/ExpenseTracker/ACCOUNTS";
             File file = new File(folderPath, email + ".txt");
             
             if (!file.exists()) {
@@ -67,20 +100,14 @@ public class Database {
                 usertxtfile.add(line); 
             }
             reader.close();
-        } 
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return usertxtfile;
     }
 
-    public void Budgeting(){
-        
+    
+
+    public void Budgeting() {
     }
-
-    public void Savings(){
-
-    }
-
-
 }
