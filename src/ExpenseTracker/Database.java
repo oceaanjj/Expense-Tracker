@@ -40,26 +40,10 @@ public class Database {
     public void setIncome(double income) {
         this.income = income;
     }
-
-    /**public void write() {
-        try {
-            BufferedWriter txt = new BufferedWriter(new FileWriter(getEmail() + ".txt", true));
-            BufferedReader read = new BufferedReader(new FileReader(getEmail() + ".txt"));
-
-            if (!read.ready()) {
-                txt.write(getEmail() + "\n" + getPassword() +  "\n" + getNickname());
-                txt.close();
-            }
-            
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }**/
     
-
+    //nag cecreate ng txt file and nag sstore ng data from user input(for registartion)
     public void write() {
         try {
-
             //palitan ng path for windows if hindi gumagana
             String folderPath = System.getProperty("user.dir") + "/ExpenseTracker/ACCOUNTS";
             File folder = new File(folderPath); 
@@ -82,6 +66,7 @@ public class Database {
         }
     }
 
+    //nag sstore ng data from txt file to arraylist(kada isang line isng index)
     public ArrayList<String> readFileToArrayList(String email) {
         ArrayList<String> usertxtfile = new ArrayList<>();
         try {
@@ -107,7 +92,4 @@ public class Database {
     }
 
     
-
-    public void Budgeting() {
-    }
 }
