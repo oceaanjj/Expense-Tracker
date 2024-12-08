@@ -10,6 +10,7 @@ public class asciiArt extends menu {
                 System.out.println("\t\t   |   ,             (\")");
                 System.out.println("\t\t   |__,'`-..--|__|--''");
                 System.out.println();  
+                System.out.println();
                 }
          
     }
