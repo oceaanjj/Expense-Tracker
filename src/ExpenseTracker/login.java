@@ -47,7 +47,7 @@ public class login {
                     return false;
                 }
             } else {
-                System.out.println("Login failed: Invalid file format.");
+                System.out.println("Account does't exist.");
                 return false;
             }
         } catch (Exception e) {

@@ -1,5 +1,6 @@
 import ExpenseTracker.Database;
 import ExpenseTracker.TermsAndConditions;
+import ExpenseTracker.asciiArt;
 import ExpenseTracker.clearScreen;
 import ExpenseTracker.loading;
 import ExpenseTracker.login;
@@ -22,18 +23,17 @@ public class Main {
         register register = new register();
         Database db = new Database();
         login login = new login();
+        asciiArt art = new asciiArt();
 
         
 
         Scanner s = new Scanner(System.in);
 
+        art.display();
         load.loading();
-        //clr.clearScreen();
+        clr.clearScreen();
 
-       mainloop : while (true) { 
-            //menu.mainmenu();
-            /**System.out.print("\n   Enter choice : ");
-            int choice = s.nextInt();*/
+       mainloop : while (true) {
 
             while (true) { 
                 mainmenu.display();
@@ -60,8 +60,17 @@ public class Main {
                         try {
                             System.out.print("Enter Email: ");
                             email = s.nextLine();
-                            db.setEmail(email);
-                            break;
+
+                            if (email == null){
+                                System.out.println("Email is required.");
+                            }
+                            else if(!email.contains("@") || !email.contains(".")) {
+                                throw new Exception();
+                            }
+                            else{
+                                db.setEmail(email);
+                                break;
+                            }
                         } catch (Exception e) {
                             System.out.println("Invalid input for email. Please try again.");
                         }
@@ -149,7 +158,7 @@ public class Main {
                         }
                     }
 
-                        while (true) {
+                while (true) {
                             try {
                                 System.out.print("Enter Password: ");
                                 password = s.nextLine();
