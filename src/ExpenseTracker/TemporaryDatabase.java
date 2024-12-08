@@ -3,7 +3,7 @@ package ExpenseTracker;
 import java.io.*;
 import java.util.ArrayList;
 
-public class Database {
+public class TemporaryDatabase {
     
     //nag sstore ng data from txt file to arraylist(kada isang line isng index)
     public ArrayList<String> readFileToArrayList(String email) {

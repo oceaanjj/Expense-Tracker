@@ -4,7 +4,7 @@ import Displays.clearScreen;
 import Displays.intro;
 import Displays.loading;
 import Displays.mainmenu;
-import ExpenseTracker.Database;
+import ExpenseTracker.TemporaryDatabase;
 import ExpenseTracker.login;
 import ExpenseTracker.register;
 import java.util.*;
@@ -24,7 +24,7 @@ public class Main {
         loading load = new loading();
         clearScreen clr = new clearScreen();
         register register = new register();
-        Database db = new Database();
+        TemporaryDatabase db = new TemporaryDatabase();
         login login = new login();
         asciiArt art = new asciiArt();
         intro intro = new intro();
@@ -65,6 +65,7 @@ public class Main {
                     System.out.println("Registration");
 
                     while (true) {
+                        //email
                         try {
                             System.out.print("Enter Email: ");
                             email = s.nextLine();
@@ -85,6 +86,7 @@ public class Main {
                     }
 
                     while (true) {
+                    //pass
                         try {
                             System.out.print("Enter Password: ");
                             password = s.nextLine();
@@ -106,9 +108,11 @@ public class Main {
                         }
                     }
 
+                    //terms and conditions medyo mahaba
                     terms.display();
 
                     while (true) {
+
                         try {
                             System.out.print("\tDo you agree to the terms and conditions? (y/n): ");
                             agree = s.nextLine().toLowerCase().charAt(0);
@@ -185,6 +189,8 @@ public class Main {
                             break;
                         }
                     }
+
+                    //end of utilities due dates keme
 
 
 

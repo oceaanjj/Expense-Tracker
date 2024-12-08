@@ -2,8 +2,9 @@ package ExpenseTracker;
 
 import java.util.Scanner;
 
-public class User extends Database {
+public class User extends TemporaryDatabase{
     Scanner in = new Scanner(System.in);
+    
     //menu
     public void userMenu() {
         System.out.println(" Menu ");

@@ -6,7 +6,8 @@ import java.util.ArrayList;
 public class login {
     private String email;
     private String password;
-    Database db = new Database();
+    private TemporaryDatabase db = new TemporaryDatabase();
+
 
     public void setEmail(String email) {
         this.email = email;
