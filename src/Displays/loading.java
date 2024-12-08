@@ -1,4 +1,4 @@
-package ExpenseTracker;
+package Displays;
 
 public class loading {
     public void loading() {

@@ -1,4 +1,4 @@
-package ExpenseTracker;
+package Displays;
 
 public class clearScreen {
     public void clearScreen() {

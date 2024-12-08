@@ -1,4 +1,4 @@
-package ExpenseTracker;
+package Displays;
 
 public class asciiArt extends menu {
     public void display() {
@@ -11,8 +11,7 @@ public class asciiArt extends menu {
                 System.out.println("\t\t   |__,'`-..--|__|--''");
                 System.out.println();  
                 System.out.println();
-                }
-         
+        }        
     }
     
 

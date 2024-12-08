@@ -1,16 +1,18 @@
+import Displays.TermsAndConditions;
+import Displays.asciiArt;
+import Displays.clearScreen;
+import Displays.intro;
+import Displays.loading;
+import Displays.mainmenu;
 import ExpenseTracker.Database;
-import ExpenseTracker.TermsAndConditions;
-import ExpenseTracker.asciiArt;
-import ExpenseTracker.clearScreen;
-import ExpenseTracker.loading;
 import ExpenseTracker.login;
-import ExpenseTracker.mainmenu;
 import ExpenseTracker.register;
 import java.util.*;
 
 public class Main {
     
     public static void main(String[] args) {
+        Scanner s = new Scanner(System.in);
         String email = "", password = "", nickname = "";
         double income = 0.0;
         int choice = 0;
@@ -24,15 +26,20 @@ public class Main {
         Database db = new Database();
         login login = new login();
         asciiArt art = new asciiArt();
+        intro intro = new intro();
 
         
-
-        Scanner s = new Scanner(System.in);
+        //start
+        clr.clearScreen();
 
         art.display();
         load.loading();
         clr.clearScreen();
 
+        //intro.display(); 
+        //may error sa intro.display
+
+        
        mainloop : while (true) {
 
             while (true) { 

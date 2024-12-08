@@ -1,4 +1,4 @@
-package ExpenseTracker;
+package Displays;
 
 import java.util.Scanner;
 
