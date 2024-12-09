@@ -140,45 +140,6 @@ public class register {
 
 
 
-    //read-only modein txt file
-    /*public void write() {
-        try {
-            String baseDir = System.getProperty("user.dir") + "/src/ExpenseTracker/ACCOUNTS";
-    
-            File folder = new File(baseDir);
-            if (!folder.exists() && !folder.mkdirs()) {
-                System.out.println("Failed to create folder!");
-                return;
-            }
-    
-            File file = new File(folder, getEmail() + ".txt");
-    
-            // Create the file if it doesn't exist
-            if (!file.exists() && !file.createNewFile()) {
-                System.out.println("Failed to create file: " + file.getName());
-                return;
-            }
-    
-            if (!file.setWritable(true)) {
-                System.out.println("Failed to make the file writable temporarily!");
-            }
-    
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
-                writer.write(getEmail() + "\n" + getPassword() + "\n" + getNickname() +
-                             "\n" + getIncome() + "\n" + getElectricity() + "\n" + getWater() +
-                             "\n" + getRent() + "\n" + getInternet() + "\n");
-            }
-    
-            if (!file.setReadOnly()) {
-                System.out.println("Failed to set the file to read-only mode!");
-            }
-    
-            System.out.println("Account created successfully!");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }*/
-    
     
 
     public void write() {
