@@ -4,8 +4,13 @@ import java.util.Scanner;
 
 public class User extends TemporaryDatabase{
     Scanner in = new Scanner(System.in);
+
+    // under add expense siya
     
-    //menu
+    
+   
+
+    //move this to display and extends mo sa menu class if done na
     public void userMenu() {
         System.out.println(" Menu ");
         System.out.println("1. Add Expense");
