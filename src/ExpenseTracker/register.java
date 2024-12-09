@@ -134,48 +134,34 @@ public class register {
 
     public void write() {
         try {
-       
-            String baseDir;
-        
-            //for linux and mac
-            if (System.getProperty("os.name").toLowerCase().contains("mac") || System.getProperty("os.name").toLowerCase().contains("nix")) {
-                baseDir = "/Users/macbookpro15/Downloads/casestudy/Expense-Tracker/src/ExpenseTracker";  
-            } else {
-                //windows path keme.... change niyo guys into windows if hindi nagana
-                baseDir = System.getProperty("user.home") + "\\Documents\\ExpenseTracker"; 
-            }
+            //palitan mo yung path na to sa path if hindi nagana sa windows
+            String baseDir = System.getProperty("user.dir") + "/src/ExpenseTracker/ACCOUNTS";
             
-            String folderPath = baseDir + File.separator + "ACCOUNTS";
-            File folder = new File(folderPath);
     
-           
+            File folder = new File(baseDir);
             if (!folder.exists()) {
-                boolean created = folder.mkdirs();  
+                boolean created = folder.mkdirs();
                 if (!created) {
-                    System.out.println("Failed to create folder!");
-                    return;  
+                    System.out.println("Failed to create folder !");
+                    return;
                 }
-                
             }
-    
-           
-            File file = new File(folder, getEmail() + ".txt");
     
 
+            File file = new File(folder, getEmail() + ".txt");
             if (!file.exists()) {
                 boolean created = file.createNewFile();
                 if (!created) {
                     System.out.println("Failed to create file: " + file.getName());
-                    return;  
+                    return;
                 }
-
             }
-    
-            BufferedWriter writer = new BufferedWriter(new FileWriter(file, true)); 
-            writer.write(getEmail() + "\n" + getPassword() + "\n" + getNickname() + 
-                         "\n" + getIncome() + "\n" + getElectricity() + "\n" + getWater() + 
-                         "\n" + getRent() + "\n" + getInternet() + "\n");
-            writer.close();
+
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) { 
+                writer.write(getEmail() + "\n" + getPassword() + "\n" + getNickname() + 
+                             "\n" + getIncome() + "\n" + getElectricity() + "\n" + getWater() + 
+                             "\n" + getRent() + "\n" + getInternet() + "\n");
+            }
     
             System.out.println("Account created successfully!");
     
@@ -183,6 +169,7 @@ public class register {
             e.printStackTrace();
         }
     }
+    
     
 
     

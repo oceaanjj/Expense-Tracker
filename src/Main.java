@@ -97,6 +97,8 @@ public class Main {
                         }
                     }
 
+
+                    //nickname
                     while (true) {
                         try {
                             System.out.print("Enter Nickname: ");
@@ -198,8 +200,6 @@ public class Main {
                     register.write();
                    
                     break;
-
-
 
 
 

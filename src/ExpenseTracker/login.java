@@ -1,12 +1,14 @@
 package ExpenseTracker;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.util.ArrayList;
 
 public class login {
     private String email;
     private String password;
-    private TemporaryDatabase db = new TemporaryDatabase();
+  
 
 
     public void setEmail(String email) {
@@ -25,38 +27,52 @@ public class login {
         return password;
     }
 
-    public boolean userLogin(String email, String password) {
-        try {
-            //palitan ng path for windows if hindi gumagana
-            String folderPath = System.getProperty("user.dir") + "/ExpenseTracker/ACCOUNTS";
-            File file = new File(folderPath, getEmail() + ".txt");
-            if (!file.exists()) {
-                System.out.println("Login failed: Email not registered.");
-                return false;
-            }
+   public boolean userLogin(String email, String password) {
+    try {
+        
 
-            ArrayList<String> userTxtFile = db.readFileToArrayList(getEmail());
+        //change niyo path into windows if hindi gumagana login (Account doesn't exist ket meron) 
+        String directory = System.getProperty("user.dir") + "/src/ExpenseTracker/ACCOUNTS";
+        File file = new File(directory, getEmail() + ".txt"); 
 
-            if (userTxtFile.size() >= 3) {
-                String userEmail = userTxtFile.get(0); 
-                String userPassword = userTxtFile.get(1); 
-                if (userEmail.equals(getEmail()) && userPassword.equals(getPassword())) {
-                    System.out.println("Login successful!");
-                    return true;
-                } else {
-                    System.out.println("Login failed: Incorrect email or password.");
-                    return false;
-                }
-            } else {
-                System.out.println("Account does't exist.");
-                return false;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Login failed: Error occurred.");
+       
+        if (!file.exists()) {
+            System.out.println("Login failed : Account does not exist.");
             return false;
-            
         }
-    }
 
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        ArrayList<String> userTxtFile = new ArrayList<>();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            userTxtFile.add(line.trim());
+        }
+        reader.close();
+
+  
+        if (userTxtFile.size() >= 2) {
+            String fileEmail = userTxtFile.get(0);
+            String filePassword = userTxtFile.get(1); 
+          
+
+            if (fileEmail.equals(getEmail()) && filePassword.equals(getPassword())) {
+                System.out.println("Login successful!");
+                return true;
+            } else {
+                System.out.println("Login failed: Incorrect email or password.");
+                return false;
+            }
+        } else {
+            System.out.println("Account file is corrupted or incomplete.");
+            return false;
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+        System.out.println("Login failed : Error occurred.");
+        return false;
+    }
+}
+
+    
+    
 }

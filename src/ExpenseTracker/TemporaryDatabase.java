@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class TemporaryDatabase {
-    
+    /**might delete moved to login only */
     //nag sstore ng data from txt file to arraylist(kada isang line isng index)
     public ArrayList<String> readFileToArrayList(String email) {
         ArrayList<String> usertxtfile = new ArrayList<>();
