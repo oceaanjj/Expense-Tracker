@@ -8,6 +8,7 @@ import Displays.loading;
 import Displays.mainmenu;
 import ExpenseTracker.DeleteAccount;
 import ExpenseTracker.TemporaryDatabase;
+import ExpenseTracker.UpdateAccount;
 import ExpenseTracker.login;
 import ExpenseTracker.register;
 import java.util.*;
@@ -20,6 +21,7 @@ public class Main {
         double income = 0.0;
         int choice = 0;
         char agree;
+        String confirmation;
         String registeredEmail, registeredPassword;
         String electricityDate, waterDate, rentDate, internetDate;
 
@@ -35,6 +37,7 @@ public class Main {
         UserMenu userMenu = new UserMenu();
         MyAccount myAccount = new MyAccount();
         DeleteAccount delete = new DeleteAccount();
+        UpdateAccount update = new UpdateAccount();
 
         
         //start
@@ -211,17 +214,9 @@ public class Main {
                     }
 
                     //end of utilities due dates keme
-
-
-
-    
                     register.write();
                    
                     break;
-
-
-
-
 
                 case 2: 
                     //login
@@ -239,7 +234,7 @@ public class Main {
                         }
                     }
 
-                while (true) {
+                    while (true) {
                             try {
                                 System.out.print("Enter Password: ");
                                 password = s.nextLine();
@@ -248,11 +243,12 @@ public class Main {
                             } catch (Exception e) {
                                 System.out.println("Invalid input for password. Please try again.");
                             }
-                        }
+                    }
 
                     boolean loginStatus = login.userLogin(login.getEmail(), login.getPassword());
                     if (loginStatus) {
-                      
+                        
+                    UserMainMenu : while (true) {
                         userMenu.display();
                         System.out.println("Enter choice: ");
                         int userChoice = s.nextInt();
@@ -260,28 +256,76 @@ public class Main {
 
                         switch(userChoice){
                             case 1:
+                            myAccountmenu : while (true) {
                                 myAccount.display();
                                 System.out.println("Enter choice: ");
                                 int accountChoice = s.nextInt();
                                 switch(accountChoice){
                                     case 1:
-                                        //change email
-                                        break;
+                                        //change email                                       
+                                            s.nextLine();
+                                            System.out.println("Enter new email: ");
+                                            String newEmail = s.nextLine();
+                                            update.setNewEmail(newEmail);
+
+                                            while (true) {
+                                                System.out.print("Enter your registered email: ");
+                                                registeredEmail = s.nextLine();
+                                                update.setEmail(registeredEmail);
+                                            
+                                            
+                                                if (!update.isCorrectEmail()) {
+                                                    System.out.println("Email does not match the registered email.");
+                                                    continue;  
+                                                }
+                                                else{
+                                                    break;
+                                                }
+                                            }
+                                            
+                                            while(true){
+                                                System.out.print("Enter your password: ");
+                                                registeredPassword = s.nextLine();
+                                                update.setPassword(registeredPassword);
+                                                                                
+                                                if (!update.isCorrectPassword()) {
+                                                    System.out.println("Incorrect password.");
+                                                    continue;  
+                                                }
+                                                else{
+                                                    break;
+                                                }
+                                            }
+                                                System.out.print("Are you sure you want to change your email? (y/n): ");
+                                                confirmation = s.nextLine().toLowerCase().trim();
+                                            
+                                                if (confirmation.charAt(0) == 'y') {
+                                                    update.ChangeEmail();
+                                                    break;
+                                                    
+                                                } else {
+                                                    System.out.println("Changing account email cancelled.");
+                                                    
+                                                    continue myAccountmenu;
+                                                } 
+                                        
+                                    
+            
+
+                                       
+
+
                                     case 2:
                                         //change password
                                         break;
                                     case 3:
                                         //change monthly income
                                         break;
+
                                     case 4:
                                         //deletion ng account
-                                    
                                         s.nextLine();
                                         while (true) {
-
-                         
-                                        
-                                     
                                             System.out.print("Enter your registered email: ");
                                             registeredEmail = s.nextLine();
                                             delete.setEmail(registeredEmail);
@@ -314,7 +358,7 @@ public class Main {
                                         
                                             
                                             System.out.print("Are you sure you want to delete your account? (y/n): ");
-                                            String confirmation = s.nextLine().toLowerCase().trim();
+                                            confirmation = s.nextLine().toLowerCase().trim();
                                         
                                             if (confirmation.charAt(0) == 'y') {
                                                 delete.delete();
@@ -323,10 +367,10 @@ public class Main {
                                             } else {
                                                 System.out.println("Account deletion cancelled.");
                                                 
-                                                
+                                                continue myAccountmenu;
                                             } 
-                                                                                   
-                                             break;
+
+                                             
 
 
                                     case 5:
@@ -340,13 +384,15 @@ public class Main {
                                         break;
 
                                     case 7:
-                                        //back to UserMenu ulit
-                                        break;
+                                      
+                                        continue UserMainMenu;
                                     default:
                                         System.out.println("Invalid choice. Please select a valid option.");
                                         break;
-                                }
-                                break;
+                                }//switch case of my accountAccount
+                            } //my account end loop
+                            
+                            
 
                             case 2:
                                 //expense tracker
@@ -362,10 +408,16 @@ public class Main {
                                 break;
                         }
                        
-                    } else {
-                        
-                    }
+                    } //end of user main menu loop
+
+                        }//login status
+                        else {
+                            System.out.println("Invalid email or password. Please try again.");
+                        }
+
+                
                     break;
+                
 
 
 
@@ -379,7 +431,7 @@ public class Main {
                     System.out.println("Invalid choice. Please select a valid option.");
                     break;
             }
-        }
-        }
+            }
+        }//end ng main loop
     }
 }
