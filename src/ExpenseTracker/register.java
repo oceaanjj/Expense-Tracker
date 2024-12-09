@@ -169,7 +169,19 @@ public class register {
             e.printStackTrace();
         }
     }
-    
+
+
+    public boolean isEmailExist(String email) {
+        String directory = System.getProperty("user.dir") + "/src/ExpenseTracker/ACCOUNTS";
+        File file = new File(directory, email + ".txt"); 
+
+            if(file.exists()){
+                return true;
+            }
+        return false;
+    }
+
+
     
 
     

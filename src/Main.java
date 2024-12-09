@@ -75,10 +75,21 @@ public class Main {
                             }
                             else if(!email.contains("@") || !email.contains(".")) {
                                 throw new Exception();
+
+                                
                             }
+                            
+                
                             else{
-                                register.setEmail(email);
-                                break;
+
+                                if(register.isEmailExist(email) == true){
+                                    System.out.println("Email already exists.");
+                                }
+                                else{
+                                    register.setEmail(email);
+                                    break;
+                                }
+                                
                             }
                         } catch (Exception e) {
                             System.out.println("Invalid input for email. Please try again.");
