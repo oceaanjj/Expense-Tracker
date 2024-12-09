@@ -256,7 +256,7 @@ public class Main {
                                             int accountChoice = s.nextInt();
                                             switch(accountChoice){
                                                 case 1:
-                                                    //change email                                       
+                                                    //change email (final)                                     
                                                         s.nextLine();
                                                         System.out.println("Enter new email: ");
                                                         String newEmail = s.nextLine();
@@ -305,11 +305,104 @@ public class Main {
                                                     
 
                                                 case 2:
-                                                    //change password
-                                                    break;
+                                                    //change password (final)
+                                                        s.nextLine();
+                                                        System.out.println("Enter new password : ");
+                                                        String newPassword = s.nextLine();
+                                                        update.setNewPassword(newPassword);
+
+                                                        while (true) {
+                                                            System.out.print("Enter your registered email : ");
+                                                            registeredEmail = s.nextLine();
+                                                            update.setEmail(registeredEmail);
+                                                        
+                                                        
+                                                            if (!update.isCorrectEmail()) {
+                                                                System.out.println("Email does not match the registered email.");
+                                                                continue;  
+                                                            }
+                                                            else{
+                                                                break;
+                                                            }
+                                                        }
+                                                        
+                                                        while(true){
+                                                            System.out.print("Enter your account password : ");
+                                                            registeredPassword = s.nextLine();
+                                                            update.setPassword(registeredPassword);
+                                                                                            
+                                                            if (!update.isCorrectPassword()) {
+                                                                System.out.println("Incorrect password.");
+                                                                continue;  
+                                                            }
+                                                            else{
+                                                                break;
+                                                            }
+                                                        }
+
+                                                            System.out.print("Are you sure you want to change your email? (y/n): ");
+                                                            confirmation = s.nextLine().toLowerCase().trim();
+                                                            
+                                                            if (confirmation.charAt(0) == 'y') {
+                                                                update.ChangePassword();
+                                                                break;
+                                                                    
+                                                            } else {
+                                                                System.out.println("Changing account email cancelled.");
+                                                                    
+                                                                continue myAccountmenu;
+                                                            } 
+                                            
+                                                   
+
                                                 case 3:
+                                                    
                                                     //change monthly income
-                                                    break;
+                                                    System.out.print("Enter new monthly income: ");
+                                                    double newIncome = s.nextDouble();
+                                                    update.setMonthlyIncome(newIncome);
+                                                    s.nextLine();
+                                                    while (true) {
+                                                        System.out.print("Enter your registered email : ");
+                                                        registeredEmail = s.nextLine();
+                                                        update.setEmail(registeredEmail);
+                                                    
+                                                    
+                                                        if (!update.isCorrectEmail()) {
+                                                            System.out.println("Email does not match the registered email.");
+                                                            continue;  
+                                                        }
+                                                        else{
+                                                            break;
+                                                        }
+                                                    }
+                                                    
+                                                    while(true){
+                                                        System.out.print("Enter your account password : ");
+                                                        registeredPassword = s.nextLine();
+                                                        update.setPassword(registeredPassword);
+                                                                                        
+                                                        if (!update.isCorrectPassword()) {
+                                                            System.out.println("Incorrect password.");
+                                                            continue;  
+                                                        }
+                                                        else{
+                                                            break;
+                                                        }
+                                                    }
+
+                                                        System.out.print("Are you sure you want to change your email? (y/n): ");
+                                                        confirmation = s.nextLine().toLowerCase().trim();
+                                                        
+                                                        if (confirmation.charAt(0) == 'y') {
+                                                            update.ChangeIncome();
+                                                            break;
+                                                                
+                                                        } else {
+                                                            System.out.println("Changing account email cancelled.");                                                               
+                                                            continue myAccountmenu;
+                                                        } 
+                                                    
 
                                                 case 4:
                                                     //deletion ng account
@@ -363,11 +456,34 @@ public class Main {
 
 
                                                 case 5:
+                                                /**
+                                                 * 
+                                                 * 
+                                                 * 
+                                                 * 
+                                                 * RAIN - PRINTING OF DATA SHARING AGREEMENT
+                                                 * 
+                                                 * 
+                                                 * 
+                                                 * 
+                                                 * 
+                                                 */
                                                 //*ipapagawa kay rain */
                                                     //read data sharing agreement
                                                     break;
 
                                                 case 6:
+                                                /**
+                                                 * 
+                                                 * 
+                                                 * 
+                                                 * 
+                                                 * RAIN - PRINTING HOW TO USE THE SYSTEM
+                                                 * 
+                                                 * 
+                                                 * 
+                                                 *                                         
+                                                 */
                                                 //*ipapagawa kay rain */
                                                     //help
                                                     break;
@@ -383,9 +499,19 @@ public class Main {
                                         
                                         
 
+                                        /** 
+                                         * 
+                                         * 
+                                         *  BRYAN - EXPENSE TRACKER  
+                                         * 
+                                         * 
+                                         * 
+                                         * */                                       
                                         case 2:
                                             //expense tracker
                                             break;
+
+
                                         case 3:
                                             //insights summary or history of the user expenses keme
                                             break;

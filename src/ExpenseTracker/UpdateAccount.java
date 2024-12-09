@@ -56,6 +56,36 @@ public class UpdateAccount {
         return newPassword;
     }
 
+    public boolean isCorrectEmail() {
+        String directory = System.getProperty("user.dir") + "/src/ExpenseTracker/ACCOUNTS";
+        File file = new File(directory, getEmail() + ".txt");
+
+        return file.exists();
+    }
+
+    public boolean isCorrectPassword() {
+        String directory = System.getProperty("user.dir") + "/src/ExpenseTracker/ACCOUNTS";
+        File file = new File(directory, getEmail() + ".txt");
+    
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line1 = reader.readLine(); 
+            String line2 = reader.readLine();  
+            reader.close();
+    
+            if (line1 != null && line2 != null) {
+                return line2.equals(getPassword());  
+            } else {
+                System.out.println("File does not contain sufficient data.");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+            return false;
+    }
+
+
+
     public void ChangeEmail() {
         String directory = System.getProperty("user.dir") + "/src/ExpenseTracker/ACCOUNTS";
         File oldFileName = new File(directory, getEmail() + ".txt");  
@@ -87,8 +117,8 @@ public class UpdateAccount {
     
 
 
-        public void ChangePassword(String newPassword) {
-            String directory = System.getProperty("user.dir") + "/src/ExpenseTracker/ACCOUNTS";
+    public void ChangePassword() {
+          String directory = System.getProperty("user.dir") + "/src/ExpenseTracker/ACCOUNTS";
             File file = new File(directory, getEmail() + ".txt");
             
             if (file.exists()) {
@@ -109,32 +139,30 @@ public class UpdateAccount {
             }
         }
 
-        public boolean isCorrectEmail() {
-        String directory = System.getProperty("user.dir") + "/src/ExpenseTracker/ACCOUNTS";
-        File file = new File(directory, getEmail() + ".txt");
+        
 
-        return file.exists();
-        }
+        
 
-        public boolean isCorrectPassword() {
-        String directory = System.getProperty("user.dir") + "/src/ExpenseTracker/ACCOUNTS";
-        File file = new File(directory, getEmail() + ".txt");
-    
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(file));
-            String line1 = reader.readLine(); 
-            String line2 = reader.readLine();  
-            reader.close();
-    
-            if (line1 != null && line2 != null) {
-                return line2.equals(getPassword());  
+        public void ChangeIncome(){
+            String directory = System.getProperty("user.dir") + "/src/ExpenseTracker/ACCOUNTS";
+            File file = new File(directory, getEmail() + ".txt");
+            
+            if (file.exists()) {
+                try {                
+                    List<String> lines = new ArrayList<>(Files.readAllLines(file.toPath()));                   
+                    if (lines.size() > 3) {
+                        lines.set(3, String.valueOf(getMonthlyIncome())); 
+                    }
+
+                
+                    Files.write(file.toPath(), lines);
+                    System.out.println("Income changed successfully.");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             } else {
-                System.out.println("File does not contain sufficient data.");
+                System.out.println("Can't change Income. Please try again.");
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return false;
         }
 
 
