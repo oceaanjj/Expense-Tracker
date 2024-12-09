@@ -127,11 +127,6 @@ public class register {
         }
     }
 
-
-
-
-
-
     public void write() {
         try {
             //palitan mo yung path na to sa path if hindi nagana sa windows
@@ -181,9 +176,5 @@ public class register {
         return false;
     }
 
-
-    
-
-    
 
 }
