@@ -1,7 +1,7 @@
 package DISPLAY;
 
 
-public class loading {
+public class LoadingMenu {
     public void loading() {
         try {
             System.out.println("\t\t\t  Loading:");

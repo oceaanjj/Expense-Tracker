@@ -2,10 +2,10 @@ package ExpenseTracker;
 
 import java.util.Scanner;
 
-public class AccountUpdater extends UpdateAccount {
+public class AccountUpdater extends Update {
 
     private Scanner s = new Scanner(System.in);
-    private UpdateAccount update = new UpdateAccount();
+    private Update update = new Update();
     
 
 
@@ -97,7 +97,9 @@ public class AccountUpdater extends UpdateAccount {
         }
     }
 
+    @Override
     public void ChangeIncome() {
+
         System.out.print("Enter new income : ");
         double newIncome = s.nextDouble();
         update.setMonthlyIncome(newIncome);

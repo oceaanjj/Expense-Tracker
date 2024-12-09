@@ -1,15 +1,15 @@
+import DISPLAY.ClearScreen;
+import DISPLAY.LoadingMenu;
 import DISPLAY.TermsAndConditions;
 import DISPLAY.UserMenu;
 import DISPLAY.asciiArt;
-import DISPLAY.clearScreen;
 import DISPLAY.intro;
-import DISPLAY.loading;
 import DISPLAY.mainmenu;
 import ExpenseTracker.AccountUpdater;
 import ExpenseTracker.DeleteAccount;
 import ExpenseTracker.MyAccount;
 import ExpenseTracker.TemporaryDatabase;
-import ExpenseTracker.UpdateAccount;
+import ExpenseTracker.Update;
 import ExpenseTracker.login;
 import ExpenseTracker.register;
 import java.util.*;
@@ -28,8 +28,8 @@ public class Main {
 
         TermsAndConditions terms = new TermsAndConditions();
         mainmenu mainmenu = new mainmenu();
-        loading load = new loading();
-        clearScreen clr = new clearScreen();
+        LoadingMenu load = new LoadingMenu();
+        ClearScreen clr = new ClearScreen();
         register register = new register();
         TemporaryDatabase db = new TemporaryDatabase();
         login login = new login();
@@ -38,7 +38,7 @@ public class Main {
         UserMenu userMenu = new UserMenu();
         MyAccount myAccount = new MyAccount();
         DeleteAccount delete = new DeleteAccount();
-        UpdateAccount update = new UpdateAccount();
+        Update update = new Update();
         AccountUpdater updater = new AccountUpdater();
 
         

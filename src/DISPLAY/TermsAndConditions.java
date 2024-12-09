@@ -4,6 +4,7 @@ package DISPLAY;
 import java.util.Scanner;
 
 public class TermsAndConditions extends menu {
+    
     public void display() {
         Scanner s = new Scanner(System.in);
         System.out.println("╔══════════════════════════════════════════════════════════════════════════════════════════════════════════════╗");
@@ -30,5 +31,6 @@ public class TermsAndConditions extends menu {
         System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
         System.out.println("\tPress Enter to continue...");
         s.nextLine(); 
+        s.close();  
     }
 }
