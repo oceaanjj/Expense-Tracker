@@ -20,6 +20,7 @@ public class Main {
         double income = 0.0;
         int choice = 0;
         char agree;
+        String registeredEmail, registeredPassword;
         String electricityDate, waterDate, rentDate, internetDate;
 
         TermsAndConditions terms = new TermsAndConditions();
@@ -274,35 +275,58 @@ public class Main {
                                         break;
                                     case 4:
                                         //deletion ng account
+                                    
                                         s.nextLine();
-                                        System.out.print("Enter your registered email: ");
-                                        String registeredEmail = s.nextLine();  // Get the email input correctly
-                                        delete.setEmail(registeredEmail);
+                                        while (true) {
 
-                                        if(!delete.isCorrectEmail()){
-                                            System.out.println("Email does not match the registered email.");
-                                            break;
+                         
+                                        
+                                     
+                                            System.out.print("Enter your registered email: ");
+                                            registeredEmail = s.nextLine();
+                                            delete.setEmail(registeredEmail);
+                                        
+                                         
+                                            if (!delete.isCorrectEmail()) {
+                                                System.out.println("Email does not match the registered email.");
+                                                continue;  
+                                            }
+                                            else{
+                                                break;
+                                            }
                                         }
-                                        else{
-                                            
+                                        
+                                        while(true){
+                                            System.out.print("Enter your password: ");
+                                            registeredPassword = s.nextLine();
+                                            delete.setPassword(registeredPassword);
+                                        
+                                        
+                                            if (!delete.isCorrectPassword()) {
+                                                System.out.println("Incorrect password.");
+                                                continue;  
+                                            }
+                                            else{
+                                                break;
+                                            }
 
+                                        }
+                                        
+                                            
                                             System.out.print("Are you sure you want to delete your account? (y/n): ");
-                                            String confirmation = s.nextLine().toLowerCase().trim(); 
-
-                                       
-                                        if (confirmation.charAt(0) == 'y') {
-                                            delete.delete();  
-                                        } else {
-                                            System.out.println("Account deletion cancelled.");
-                                            
-                                        }
-                                        }
-
+                                            String confirmation = s.nextLine().toLowerCase().trim();
                                         
-
-                                      
-                                        
-                                        break;
+                                            if (confirmation.charAt(0) == 'y') {
+                                                delete.delete();
+                                                break;
+                                                
+                                            } else {
+                                                System.out.println("Account deletion cancelled.");
+                                                
+                                                
+                                            } 
+                                                                                   
+                                             break;
 
 
                                     case 5:
