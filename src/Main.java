@@ -1,5 +1,6 @@
 import DISPLAY.ClearScreen;
 import DISPLAY.LoadingMenu;
+import DISPLAY.MyAccount;
 import DISPLAY.TermsAndConditions;
 import DISPLAY.UserMenu;
 import DISPLAY.asciiArt;
@@ -7,7 +8,6 @@ import DISPLAY.intro;
 import DISPLAY.mainmenu;
 import ExpenseTracker.AccountUpdater;
 import ExpenseTracker.DeleteAccount;
-import ExpenseTracker.MyAccount;
 import ExpenseTracker.Registration;
 import ExpenseTracker.TemporaryDatabase;
 import ExpenseTracker.Update;

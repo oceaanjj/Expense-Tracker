@@ -130,17 +130,21 @@ public class Registration {
             System.out.print("Enter due date (YYYY-MM-DD): ");
             String date = s.nextLine();
             if (register.isCorrectdate(date)) {
-                if (utility.equals("ELECTRICITY")) {
-                    register.setElectricity(date);
-                }
-                else if (utility.equals("WATER")) {
-                    register.setWater(date);
-                }
-                else if (utility.equals("RENT")) {
-                    register.setRent(date);
-                }
-                else if (utility.equals("INTERNET")) {
-                    register.setInternet(date);
+                switch (utility) {
+                    case "ELECTRICITY":
+                        register.setElectricity(date);
+                        break;
+                    case "WATER":
+                        register.setWater(date);
+                        break;
+                    case "RENT":
+                        register.setRent(date);
+                        break;
+                    case "INTERNET":
+                        register.setInternet(date);
+                        break;
+                    default:
+                        break;
                 }
                 break;
             }

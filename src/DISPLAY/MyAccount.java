@@ -1,5 +1,4 @@
-package ExpenseTracker;
-import DISPLAY.menu;
+package DISPLAY;
 
 public class MyAccount extends menu {
     public void display() {
