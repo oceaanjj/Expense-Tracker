@@ -12,14 +12,7 @@ public class UpdateAccount {
     private double monthlyIncome;
     private String newEmail;
     private String newPassword;
-        /*System.out.println("MY ACCOUNT");
-        System.out.println("[1] Change Email");
-        System.out.println("[2] Change Password");
-        System.out.println("[3] Change Monthly Income");
-        System.out.println("[5] Delete Account");
-        System.out.println("[6] Read Data Sharing Agreement");
-        System.out.println("[7] Help");
-        System.out.println("[8] Back");*/
+
 
     public void setEmail(String email) {
         this.email = email;

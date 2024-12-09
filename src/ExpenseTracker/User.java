@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class User extends TemporaryDatabase{
     Scanner in = new Scanner(System.in);
 
-    // under add expense siya
+    // under EXPENSE TRACKER SIYA SA MAIN 
     
     
    

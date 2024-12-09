@@ -1,9 +1,12 @@
+import Displays.MyAccount;
 import Displays.TermsAndConditions;
+import Displays.UserMenu;
 import Displays.asciiArt;
 import Displays.clearScreen;
 import Displays.intro;
 import Displays.loading;
 import Displays.mainmenu;
+import ExpenseTracker.DeleteAccount;
 import ExpenseTracker.TemporaryDatabase;
 import ExpenseTracker.login;
 import ExpenseTracker.register;
@@ -28,6 +31,9 @@ public class Main {
         login login = new login();
         asciiArt art = new asciiArt();
         intro intro = new intro();
+        UserMenu userMenu = new UserMenu();
+        MyAccount myAccount = new MyAccount();
+        DeleteAccount delete = new DeleteAccount();
 
         
         //start
@@ -245,7 +251,92 @@ public class Main {
 
                     boolean loginStatus = login.userLogin(login.getEmail(), login.getPassword());
                     if (loginStatus) {
-                        
+                      
+                        userMenu.display();
+                        System.out.println("Enter choice: ");
+                        int userChoice = s.nextInt();
+
+
+                        switch(userChoice){
+                            case 1:
+                                myAccount.display();
+                                System.out.println("Enter choice: ");
+                                int accountChoice = s.nextInt();
+                                switch(accountChoice){
+                                    case 1:
+                                        //change email
+                                        break;
+                                    case 2:
+                                        //change password
+                                        break;
+                                    case 3:
+                                        //change monthly income
+                                        break;
+                                    case 4:
+                                        //deletion ng account
+                                        s.nextLine();
+                                        System.out.print("Enter your registered email: ");
+                                        String registeredEmail = s.nextLine();  // Get the email input correctly
+                                        delete.setEmail(registeredEmail);
+
+                                        if(!delete.isCorrectEmail()){
+                                            System.out.println("Email does not match the registered email.");
+                                            break;
+                                        }
+                                        else{
+                                            
+
+                                            System.out.print("Are you sure you want to delete your account? (y/n): ");
+                                            String confirmation = s.nextLine().toLowerCase().trim(); 
+
+                                       
+                                        if (confirmation.charAt(0) == 'y') {
+                                            delete.delete();  
+                                        } else {
+                                            System.out.println("Account deletion cancelled.");
+                                            
+                                        }
+                                        }
+
+                                        
+
+                                      
+                                        
+                                        break;
+
+
+                                    case 5:
+                                    //*ipapagawa kay rain */
+                                        //read data sharing agreement
+                                        break;
+
+                                    case 6:
+                                    //*ipapagawa kay rain */
+                                        //help
+                                        break;
+
+                                    case 7:
+                                        //back to UserMenu ulit
+                                        break;
+                                    default:
+                                        System.out.println("Invalid choice. Please select a valid option.");
+                                        break;
+                                }
+                                break;
+
+                            case 2:
+                                //expense tracker
+                                break;
+                            case 3:
+                                //insights summary or history of the user expenses keme
+                                break;
+                            case 4:
+                                //logout
+                                break;
+                            default:
+                                System.out.println("Invalid choice. Please select a valid option.");
+                                break;
+                        }
                        
                     } else {
                         
