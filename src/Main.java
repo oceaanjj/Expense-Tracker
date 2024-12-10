@@ -11,7 +11,6 @@ import ExpenseTracker.AccountUpdater;
 import ExpenseTracker.Registration;
 import ExpenseTracker.TemporaryDatabase;
 import ExpenseTracker.login;
-import ExpenseTracker.register;
 import java.util.*;
 
 public class Main {
@@ -33,7 +32,7 @@ public class Main {
         mainmenu mainmenu = new mainmenu();
         LoadingMenu load = new LoadingMenu();
         ClearScreen clr = new ClearScreen();
-        register register = new register();
+        Registration register = new Registration();
         TemporaryDatabase db = new TemporaryDatabase();
         login login = new login();
         asciiArt art = new asciiArt();
@@ -76,8 +75,7 @@ public class Main {
                             //registration
                             case 1: 
                                 clr.clearScreen();
-                                Registration registration = new Registration(s, register);
-                                registration.startRegistration();
+                                register.startRegistration();
                                 break;
 
                             case 2: 
