@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class Registration {
 
-    private Scanner s = new Scanner(System.in); 
+    private Scanner s = new Scanner(System.in); // Initialize Scanner directly here
     private String nickname;
     private String email;
     private String password;
@@ -26,6 +26,7 @@ public class Registration {
     private final DateTimeFormatter dateFormatterDash = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     /*public Registration() {
+    
     }*/
 
     public void startRegistration() {
@@ -70,7 +71,7 @@ public class Registration {
         while (true) {
             try {
                 System.out.print("Enter Password: ");
-                String password = s.nextLine();
+                password = s.nextLine();
                 this.password = password;
                 break;
             } catch (Exception e) {
@@ -119,9 +120,29 @@ public class Registration {
     private void handleUtilityDate(String utility) {
         while (true) {
             System.out.println(utility);
-            System.out.print("Enter due date (YYYY-MM-DD): ");
+            System.out.print("Enter due date (YYYY-MM-DD) or type 'optional' to skip: ");
             String date = s.nextLine();
-            if (isCorrectdate(date)) {
+
+            if (date.equalsIgnoreCase("optional")) {
+                // Set as N/A if the user types 'optional'
+                switch (utility) {
+                    case "ELECTRICITY":
+                        this.electricity = null;
+                        break;
+                    case "WATER":
+                        this.water = null;
+                        break;
+                    case "RENT":
+                        this.rent = null;
+                        break;
+                    case "INTERNET":
+                        this.internet = null;
+                        break;
+                }
+                break; // Skip to next utility
+            }
+
+            if (isCorrectDate(date)) {
                 switch (utility) {
                     case "ELECTRICITY":
                         this.electricity = parseDate(date);
@@ -135,15 +156,13 @@ public class Registration {
                     case "INTERNET":
                         this.internet = parseDate(date);
                         break;
-                    default:
-                        break;
                 }
-                break;
+                break; // Valid date entered, break out of loop
             }
         }
     }
 
-    private boolean isCorrectdate(String dateInput) {
+    private boolean isCorrectDate(String dateInput) {
         try {
             parseDate(dateInput);
             return true;
@@ -156,10 +175,10 @@ public class Registration {
     private LocalDate parseDate(String dateInput) {
         try {
             return LocalDate.parse(dateInput, dateFormatterSlash);
-        } catch (DateTimeParseException j) {
+        } catch (DateTimeParseException e1) {
             try {
                 return LocalDate.parse(dateInput, dateFormatterDash);
-            } catch (DateTimeParseException jo) {
+            } catch (DateTimeParseException e2) {
                 throw new DateTimeParseException("Invalid date format", dateInput, 0);
             }
         }
@@ -172,7 +191,7 @@ public class Registration {
         return file.exists();
     }
 
-    private void writeToFile() {
+    public void writeToFile() {
         try {
             String baseDir = System.getProperty("user.dir") + "/src/ExpenseTracker/ACCOUNTS";
 
@@ -180,7 +199,7 @@ public class Registration {
             if (!folder.exists()) {
                 boolean created = folder.mkdirs();
                 if (!created) {
-                    System.out.println("Failed to create folder !");
+                    System.out.println("Failed to create folder!");
                     return;
                 }
             }
@@ -196,22 +215,16 @@ public class Registration {
 
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
                 writer.write(email + "\n" + password + "\n" + nickname +
-                             "\n" + income + "\n" + formatDate(electricity) + "\n" + formatDate(water) +
-                             "\n" + formatDate(rent) + "\n" + formatDate(internet) + "\n");
+                        "\n" + income + "\n" + (electricity != null ? electricity : "N/A") +
+                        "\n" + (water != null ? water : "N/A") + "\n" +
+                        (rent != null ? rent : "N/A") + "\n" +
+                        (internet != null ? internet : "N/A") + "\n");
             }
 
             System.out.println("Account created successfully!");
 
         } catch (IOException e) {
             e.printStackTrace();
-        }
-    }
-
-    private String formatDate(LocalDate date) {
-        if (date != null) {
-            return date.format(dateFormatterSlash);
-        } else {
-            return "N/A";
         }
     }
 }
