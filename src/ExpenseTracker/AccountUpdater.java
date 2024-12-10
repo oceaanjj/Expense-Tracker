@@ -2,133 +2,82 @@ package ExpenseTracker;
 
 import java.util.Scanner;
 
-public class AccountUpdater extends Update {
-
-    private Scanner s = new Scanner(System.in);
-    private Update update = new Update();
-    
-
+public class AccountUpdater extends TextFileModifier {
+    private final Verification verifier = new Verification();
+    private final Scanner scanner = new Scanner(System.in);
 
     public void changeEmail() {
-        String newEmail;
-        
-        while (true) {
-            System.out.print("Enter new email: ");
-            newEmail = s.nextLine();
-            
-            if (!newEmail.contains("@") || !newEmail.contains(".")) {
-                System.out.println("Invalid email address.");
-                continue; 
-            } /**else if (newEmail.equals(update.getEmail())) {
-                System.out.println("New email is the same as the current email.");
-                continue; 
-            }**/
-            
+        System.out.println("Enter your new email:");
+        String newEmail = scanner.nextLine();
+        setNewEmail(newEmail);
 
-            update.setNewEmail(newEmail);
-            break; 
+        if (!verifier.verifyEmail(this) || !verifier.verifyPassword(this)) {
+            System.out.println("Verification failed. Cancelling email change.");
+            return;
         }
-    
-        if (!verifyEmail()) {
-            return; 
-        }
-    
 
-        if (!verifyPassword()) {
-            return; 
+        if (confirmAction("Are you sure you want to change your email? (y/n): ")) {
+            ChangeEmail();
         }
-    
-        System.out.print("Are you sure you want to change your email? (y/n): ");
-        String confirmation = s.nextLine().toLowerCase().trim();
-    
-        if (confirmation.charAt(0) == 'y') {
-            update.ChangeEmail();
-        } else {
+        else {
             System.out.println("Changing account email cancelled.");
         }
     }
-    
 
     public void changePassword() {
-        System.out.print("Enter new password: ");
-        String newPassword = s.nextLine();
-        update.setNewPassword(newPassword);
-        s.nextLine();
+        System.out.println("Enter your new password:");
 
-        if (!verifyEmail()) {
-            return;  
+        String newPassword = getNewPassword();
+        setNewPassword(newPassword);
+
+        if (!verifier.verifyEmail(this) || !verifier.verifyPassword(this)) {
+            System.out.println("Verification failed. Cancelling password change.");
+            return;
         }
 
-        if (!verifyPassword()) {
-            return;  
+        if (confirmAction("Are you sure you want to change your password? (y/n): ")) {
+            ChangePassword();
         }
-
-        System.out.print("Are you sure you want to change your password? (y/n): ");
-        String confirmation = s.nextLine().toLowerCase().trim();
-
-        if (confirmation.charAt(0) == 'y') {
-            update.ChangePassword();
-        } else {
+        else {
             System.out.println("Changing account password cancelled.");
         }
     }
 
-    @Override
-    public void ChangeIncome() {
+    public void changeIncome() {
+        System.out.println("Enter your new monthly income:");
+        double newIncome = scanner.nextDouble();
+        setMonthlyIncome(newIncome);
 
-        System.out.print("Enter new income : ");
-        double newIncome = s.nextDouble();
-        update.setMonthlyIncome(newIncome);
-
-        s.nextLine();
-
-        if (!verifyEmail()) {
-            return;  
+        if (!verifier.verifyEmail(this) || !verifier.verifyPassword(this)) {
+            System.out.println("Verification failed. Cancelling income change.");
+            return;
         }
 
-        if (!verifyPassword()) {
-            return;  
+        if (confirmAction("Are you sure you want to change your monthly income? (y/n): ")) {
+            ChangeIncome();
         }
-
-        System.out.print("Are you sure you want to change your income? (y/n): ");
-        String confirmation = s.nextLine().toLowerCase().trim();
-
-        if (confirmation.charAt(0) == 'y') {
-            update.ChangeIncome();
-        } else {
-            System.out.println("Changing account income cancelled.");
+        else {
+            System.out.println("Changing monthly income cancelled.");
         }
     }
 
-    private boolean verifyEmail() {
-        String registeredEmail;
-        while (true) {
-            System.out.print("Enter your registered email: ");
-            registeredEmail = s.nextLine();
-            update.setEmail(registeredEmail);
 
-            if (!update.isCorrectEmail()) {
-                System.out.println("Email does not match the registered email.");
-                continue;
-            } else {
-                return true;  
+    private boolean confirmAction(String message) {
+        while (true) {
+            System.out.print(message);
+            String confirmation = scanner.nextLine().trim().toLowerCase();
+            if (confirmation.equals("y") || confirmation.equals("yes")) {
+                return true;
+            }
+            else if (confirmation.equals("n") || confirmation.equals("no")) {
+                return false;
+            }
+            else {
+                System.out.println("Invalid input. Please enter 'y' or 'n'.");
             }
         }
     }
 
-    private boolean verifyPassword() {
-        String registeredPassword;
-        while (true) {
-            System.out.print("Enter your account password: ");
-            registeredPassword = s.nextLine();
-            update.setPassword(registeredPassword);
-
-            if (!update.isCorrectPassword()) {
-                System.out.println("Incorrect password.");
-                continue;
-            } else {
-                return true;  
-            }
-        }
-    }
 }
+
+    

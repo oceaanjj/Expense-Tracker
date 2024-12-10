@@ -6,11 +6,10 @@ import DISPLAY.UserMenu;
 import DISPLAY.asciiArt;
 import DISPLAY.intro;
 import DISPLAY.mainmenu;
+import ExpenseTracker.AccountDeleter;
 import ExpenseTracker.AccountUpdater;
-import ExpenseTracker.DeleteAccount;
 import ExpenseTracker.Registration;
 import ExpenseTracker.TemporaryDatabase;
-import ExpenseTracker.Update;
 import ExpenseTracker.login;
 import ExpenseTracker.register;
 import java.util.*;
@@ -28,7 +27,7 @@ public class Main {
         char agree;
         String confirmation;
         String registeredEmail, registeredPassword;
-        String electricityDate, waterDate, rentDate, internetDate;
+        //String electricityDate, waterDate, rentDate, internetDate;
 
         TermsAndConditions terms = new TermsAndConditions();
         mainmenu mainmenu = new mainmenu();
@@ -41,8 +40,7 @@ public class Main {
         intro intro = new intro();
         UserMenu userMenu = new UserMenu();
         MyAccount myAccount = new MyAccount();
-        DeleteAccount delete = new DeleteAccount();
-        Update update = new Update();
+        AccountDeleter delete = new AccountDeleter();
         AccountUpdater updater = new AccountUpdater();
         
 
@@ -126,71 +124,25 @@ public class Main {
                                             int accountChoice = s.nextInt();
                                             switch(accountChoice){
                                                 case 1:
-                                                    //change email                                  
+                                                    //change email (medyo done)                                
                                                     updater.changeEmail();
                                                     break;    
 
                                                 case 2:
-                                                    //change password (final)
+                                                    //change password (medyo done)
                                                     updater.changePassword();
                                                     break;
-                                            
-                                                   
-
+  
                                                 case 3:
                                                     
-                                                    //change monthly income
-                                                    updater.ChangeIncome();
+                                                    //change monthly income (medyo done)
+                                                    updater.changeIncome();
                                                     break;
 
                                                 case 4:
                                                 
-                                                    //deletion ng account
-                                                    s.nextLine();
-                                                    while (true) {
-                                                        System.out.print("Enter your registered email: ");
-                                                        registeredEmail = s.nextLine();
-                                                        delete.setEmail(registeredEmail);
-                                                    
-                                                    
-                                                        if (!delete.isCorrectEmail()) {
-                                                            System.out.println("Email does not match the registered email.");
-                                                            continue;  
-                                                        }
-                                                        else{
-                                                            break;
-                                                        }
-                                                    }
-                                                    
-                                                    while(true){
-                                                        System.out.print("Enter your password: ");
-                                                        registeredPassword = s.nextLine();
-                                                        delete.setPassword(registeredPassword);
-                                                    
-                                                    
-                                                        if (!delete.isCorrectPassword()) {
-                                                            System.out.println("Incorrect password.");
-                                                            continue;  
-                                                        }
-                                                        else{
-                                                            break;
-                                                        }
-
-                                                    }
-                                                    
-                                                        
-                                                        System.out.print("Are you sure you want to delete your account? (y/n): ");
-                                                        confirmation = s.nextLine().toLowerCase().trim();
-                                                    
-                                                        if (confirmation.charAt(0) == 'y') {
-                                                            delete.delete();
-                                                            break;
-                                                            
-                                                        } else {
-                                                            System.out.println("Account deletion cancelled.");
-                                                            
-                                                            continue myAccountmenu;
-                                                        } 
+                                                    //deletion ng account (sure na ata pag di nag bug letse)
+                                                    delete.deleteAccount();
 
                                                         
 

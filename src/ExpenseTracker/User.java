@@ -9,9 +9,6 @@ public class User extends TemporaryDatabase{
     // under EXPENSE TRACKER SIYA SA MAIN 
     
     
-   
-
-    //move this to display and extends mo sa menu class if done na
     public void userMenu() {
         System.out.println(" Menu ");
         System.out.println("1. Add Expense");
@@ -30,10 +27,11 @@ public class User extends TemporaryDatabase{
         System.out.println("[4] Rent");
         System.out.println("[5] Exit");
         int choice = in.nextInt();
+
 //then tsaka maglalagay ng addamount kinemberut tsaka babawasan yung income nila
         switch (choice) {
             case 1:
-
+                
                 break;
             case 2:
                 break;
