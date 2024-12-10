@@ -9,7 +9,6 @@ import DISPLAY.mainmenu;
 import ExpenseTracker.AccountDeleter;
 import ExpenseTracker.AccountUpdater;
 import ExpenseTracker.Registration;
-import ExpenseTracker.TemporaryDatabase;
 import ExpenseTracker.login;
 import java.util.*;
 
@@ -20,12 +19,12 @@ public class Main {
      * */
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
-        String email = "", password = "", nickname = "";
-        double income = 0.0;
-        int choice = 0;
-        char agree;
-        String confirmation;
-        String registeredEmail, registeredPassword;
+        String email, password; //nickname = "";
+        //double income = 0.0;
+        int choice;
+        //char agree;
+        //String confirmation;
+        //String registeredEmail, registeredPassword;
         //String electricityDate, waterDate, rentDate, internetDate;
 
         TermsAndConditions terms = new TermsAndConditions();
@@ -33,7 +32,7 @@ public class Main {
         LoadingMenu load = new LoadingMenu();
         ClearScreen clr = new ClearScreen();
         Registration register = new Registration();
-        TemporaryDatabase db = new TemporaryDatabase();
+        //TemporaryDatabase db = new TemporaryDatabase();
         login login = new login();
         asciiArt art = new asciiArt();
         intro intro = new intro();
@@ -116,7 +115,7 @@ public class Main {
 
                                     switch(userChoice){
                                         case 1:
-                                        myAccountmenu : while (true) {
+                                        /*myAccountmenu :*/ while (true) {
                                             myAccount.display();
                                             System.out.println("Enter choice: ");
                                             int accountChoice = s.nextInt();

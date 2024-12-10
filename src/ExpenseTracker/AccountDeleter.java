@@ -1,10 +1,7 @@
 package ExpenseTracker;
 
 import java.io.File;
-import java.util.Scanner;
-
 public class AccountDeleter extends TextFileModifier {
-    private final Scanner s = new Scanner(System.in);
     private final Verification verifier = new Verification();
     private final Confirmation confirm = new Confirmation();
 

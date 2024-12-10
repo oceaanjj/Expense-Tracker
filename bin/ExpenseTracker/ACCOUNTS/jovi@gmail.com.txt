@@ -1,0 +1,8 @@
+Email: jovi@gmail.com
+Password: jovi
+Nickname: jovi
+Income: 90000.0
+N/A
+N/A
+N/A
+N/A

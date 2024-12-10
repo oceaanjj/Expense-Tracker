@@ -9,12 +9,16 @@ public class Confirmation {
         while (true) {
             System.out.print(message);
             String confirmation = scanner.nextLine().trim().toLowerCase();
-            if (confirmation.equals("y") || confirmation.equals("yes")) {
-                return true;
-            } else if (confirmation.equals("n") || confirmation.equals("no")) {
-                return false;
-            } else {
-                System.out.println("Invalid input. Please enter 'y' or 'n'.");
+            switch (confirmation) {
+                case "y":
+                case "yes":
+                    return true;
+                case "n":
+                case "no":
+                    return false;
+                default:
+                    System.out.println("Invalid input. Please enter 'y' or 'n'.");
+                    break;
             }
         }
     }

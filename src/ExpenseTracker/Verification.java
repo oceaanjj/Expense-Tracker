@@ -51,10 +51,12 @@ public class Verification {
         File file = new File(directory, account.getEmail() + ".txt");
     
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(file));
-            String line1 = reader.readLine(); 
-            String line2 = reader.readLine(); 
-            reader.close();
+            String line1;
+            String line2;
+            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+                line1 = reader.readLine();
+                line2 = reader.readLine();
+            }
     
             if (line1 != null && line2 != null) {
                 return line2.equals(account.getPassword()); 

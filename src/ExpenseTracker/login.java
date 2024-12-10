@@ -4,6 +4,7 @@ package ExpenseTracker;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class login {
@@ -42,13 +43,14 @@ public class login {
             return false;
         }
 
-        BufferedReader reader = new BufferedReader(new FileReader(file));
-        ArrayList<String> userTxtFile = new ArrayList<>();
-        String line;
-        while ((line = reader.readLine()) != null) {
-            userTxtFile.add(line.trim());
+        ArrayList<String> userTxtFile;
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            userTxtFile = new ArrayList<>();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                userTxtFile.add(line.trim());
+            }
         }
-        reader.close();
 
   
         if (userTxtFile.size() >= 2) {
@@ -67,8 +69,7 @@ public class login {
             System.out.println("Account file is corrupted or incomplete.");
             return false;
         }
-    } catch (Exception e) {
-        e.printStackTrace();
+    } catch (IOException e) {
         System.out.println("Login failed : Error occurred.");
         return false;
     }

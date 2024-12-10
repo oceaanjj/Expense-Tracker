@@ -1,9 +1,6 @@
 package ExpenseTracker;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -11,220 +8,173 @@ import java.util.Scanner;
 
 public class Registration {
 
-    private Scanner s = new Scanner(System.in); // Initialize Scanner directly here
-    private String nickname;
+    private final Scanner s = new Scanner(System.in);
     private String email;
     private String password;
+    private String nickname;
     private double income;
 
-    private LocalDate electricity;
-    private LocalDate water;
-    private LocalDate rent;
-    private LocalDate internet;
+    private LocalDate electricityDueDate;
+    private LocalDate waterDueDate;
+    private LocalDate rentDueDate;
+    private LocalDate internetDueDate;
 
-    private final DateTimeFormatter dateFormatterSlash = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-    private final DateTimeFormatter dateFormatterDash = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
-    /*public Registration() {
-    
-    }*/
+    private final DateTimeFormatter slashFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+    private final DateTimeFormatter dashFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     public void startRegistration() {
-        System.out.println("Registration");
+        System.out.println("Registration \n");
 
-        registerEmail();
-        registerPassword();
-        registerNickname();
-        registerIncome();
+        email = getEmail();
+        password = getPassword();
+        nickname = getNickname();
+        income = getIncome();
         registerUtilityDueDates();
-        writeToFile();
+        saveAccountDetails();
     }
 
-    private void registerEmail() {
+    private String getEmail() {
         while (true) {
-            try {
-                System.out.print("Enter Email: ");
-                String email = s.nextLine();
+            System.out.print("Enter your email: ");
+            String input = s.nextLine();
 
-                if (email == null || email.isEmpty()) {
-                    System.out.println("Email is required.");
-                }
-                else if (!email.contains("@") || !email.contains(".")) {
-                    throw new Exception();
-                }
-                else {
-                    if (isEmailExist(email)) {
-                        System.out.println("Email already exists.");
-                    }
-                    else {
-                        this.email = email;
-                        break;
-                    }
-                }
-            } catch (Exception e) {
-                System.out.println("Invalid input for email. Please try again.");
+            if (input.isEmpty()) {
+                System.out.println("Email is required.");
+            }
+            else if (!input.contains("@") || !input.contains(".")) {
+                System.out.println(" * REMINDER : Email should contain '@' and '.'");
+            }
+            else if (isEmailExists(input)) {
+                System.out.println("This email is already registered.");
+            }
+            else {
+                return input;
             }
         }
     }
 
-    private void registerPassword() {
-        while (true) {
-            try {
-                System.out.print("Enter Password: ");
-                password = s.nextLine();
-                this.password = password;
-                break;
-            } catch (Exception e) {
-                System.out.println("Invalid input for password. Please try again.");
-            }
-        }
+    private String getPassword() {
+        System.out.print("Enter your password: ");
+        String registerpassword = s.nextLine();
+        return registerpassword;
     }
 
-    private void registerNickname() {
-        while (true) {
-            try {
-                System.out.print("Enter Nickname: ");
-                String nickname = s.nextLine();
-                this.nickname = nickname;
-                break;
-            } catch (Exception e) {
-                System.out.println("Invalid input for nickname. Please try again.");
-            }
-        }
+
+    private String getNickname() {
+        System.out.print("Enter your nickname: ");
+        String registernickname = s.nextLine();
+        return registernickname;
     }
 
-    private void registerIncome() {
+    private double getIncome() {
         while (true) {
+            System.out.print("Enter your monthly income: ");
             try {
-                System.out.print("Enter Income: ");
-                double income = Double.parseDouble(s.nextLine());
-                this.income = income;
-                break;
-            }
-            catch (NumberFormatException e) {
-                System.out.println("Invalid input for income. Please enter a valid number.");
-            }
-            catch (Exception e) {
-                System.out.println("An error occurred while entering income. Please try again.");
+                return Double.parseDouble(s.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please use / enter a numeric value.");
             }
         }
     }
 
     private void registerUtilityDueDates() {
-        handleUtilityDate("ELECTRICITY");
-        handleUtilityDate("WATER");
-        handleUtilityDate("RENT");
-        handleUtilityDate("INTERNET");
+        electricityDueDate = getUtilityDueDate("Electricity");
+        waterDueDate = getUtilityDueDate("Water");
+        rentDueDate = getUtilityDueDate("Rent");
+        internetDueDate = getUtilityDueDate("Internet");
     }
 
-    private void handleUtilityDate(String utility) {
+    private LocalDate getUtilityDueDate(String utilityName) {
         while (true) {
-            System.out.println(utility);
-            System.out.print("Enter due date (YYYY-MM-DD) or type 'optional' to skip: ");
-            String date = s.nextLine();
+            System.out.print("Enter due date for " + utilityName + " (YYYY-MM-DD) or type 'skip': ");
+            String input = s.nextLine();
 
-            if (date.equalsIgnoreCase("optional")) {
-                // Set as N/A if the user types 'optional'
-                switch (utility) {
-                    case "ELECTRICITY":
-                        this.electricity = null;
-                        break;
-                    case "WATER":
-                        this.water = null;
-                        break;
-                    case "RENT":
-                        this.rent = null;
-                        break;
-                    case "INTERNET":
-                        this.internet = null;
-                        break;
-                }
-                break; // Skip to next utility
+            if (input.equalsIgnoreCase("skip")) {
+                return null; 
             }
 
-            if (isCorrectDate(date)) {
-                switch (utility) {
-                    case "ELECTRICITY":
-                        this.electricity = parseDate(date);
-                        break;
-                    case "WATER":
-                        this.water = parseDate(date);
-                        break;
-                    case "RENT":
-                        this.rent = parseDate(date);
-                        break;
-                    case "INTERNET":
-                        this.internet = parseDate(date);
-                        break;
-                }
-                break; // Valid date entered, break out of loop
-            }
-        }
-    }
-
-    private boolean isCorrectDate(String dateInput) {
-        try {
-            parseDate(dateInput);
-            return true;
-        } catch (DateTimeParseException e) {
-            System.out.println("Invalid input for date. Please try again. (e.g 2021/01/01 or 2021-01-01)");
-            return false;
-        }
-    }
-
-    private LocalDate parseDate(String dateInput) {
-        try {
-            return LocalDate.parse(dateInput, dateFormatterSlash);
-        } catch (DateTimeParseException e1) {
             try {
-                return LocalDate.parse(dateInput, dateFormatterDash);
-            } catch (DateTimeParseException e2) {
-                throw new DateTimeParseException("Invalid date format", dateInput, 0);
+                return parseDate(input);
+            } catch (DateTimeParseException e) {
+                System.out.println("Invalid date format. Please try again.");
             }
         }
     }
 
-    private boolean isEmailExist(String email) {
-        String directory = System.getProperty("user.dir") + "/src/ExpenseTracker/ACCOUNTS";
-        File file = new File(directory, email + ".txt");
-
-        return file.exists();
+    private LocalDate parseDate(String date) throws DateTimeParseException {
+        try {
+            return LocalDate.parse(date, slashFormatter);
+        } catch (DateTimeParseException e) {
+            return LocalDate.parse(date, dashFormatter);
+        }
     }
 
-    public void writeToFile() {
+    private boolean isEmailExists(String email) {
+        File accountFile = new File(getAccountFilePath(email));
+        return accountFile.exists();
+    }
+
+    private String getAccountFilePath(String email) {
+        String baseDir = System.getProperty("user.dir") + "/src/ExpenseTracker/ACCOUNTS";
+        return baseDir + "/" + email + ".txt";
+    }
+
+    private void saveAccountDetails() {
         try {
-            String baseDir = System.getProperty("user.dir") + "/src/ExpenseTracker/ACCOUNTS";
+            File folder = new File(System.getProperty("user.dir") + "/src/ExpenseTracker/ACCOUNTS");
+            if (!folder.exists() && !folder.mkdirs()) {
+                System.out.println("Failed to create accounts directory.");
+                return;
+            }
 
-            File folder = new File(baseDir);
-            if (!folder.exists()) {
-                boolean created = folder.mkdirs();
-                if (!created) {
-                    System.out.println("Failed to create folder!");
-                    return;
+            File accountFile = new File(getAccountFilePath(email));
+            if (accountFile.exists()) {
+                System.out.println("Account file already exists. Cannot overwrite.");
+                return;
+            }
+
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(accountFile))) {
+                writer.write(email + "\n");
+                writer.write(password + "\n");
+                writer.write(nickname + "\n");
+                writer.write(income + "\n");
+
+                if (electricityDueDate != null) {
+                    writer.write(electricityDueDate + "\n");
                 }
-            }
-
-            File file = new File(folder, email + ".txt");
-            if (!file.exists()) {
-                boolean created = file.createNewFile();
-                if (!created) {
-                    System.out.println("Failed to create file: " + file.getName());
-                    return;
+                else {
+                    writer.write("N/A\n");
                 }
+
+                if (waterDueDate != null) {
+                    writer.write(waterDueDate + "\n");
+                }
+                else {
+                    writer.write("N/A\n");
+                }
+
+                if (rentDueDate != null) {
+                    writer.write(rentDueDate + "\n");
+                }
+                else {
+                    writer.write("N/A\n");
+                }
+
+
+                if (internetDueDate != null) {
+                    writer.write(internetDueDate + "\n");
+                }
+                else {
+                    writer.write("N/A\n");
+                }
+
+            
             }
 
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
-                writer.write(email + "\n" + password + "\n" + nickname +
-                        "\n" + income + "\n" + (electricity != null ? electricity : "N/A") +
-                        "\n" + (water != null ? water : "N/A") + "\n" +
-                        (rent != null ? rent : "N/A") + "\n" +
-                        (internet != null ? internet : "N/A") + "\n");
-            }
-
-            System.out.println("Account created successfully!");
+            System.out.println("Account successfully created!");
 
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Failed Create Account. Please try again.");
         }
     }
 }

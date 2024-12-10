@@ -1,0 +1,8 @@
+Email: rain@gmail.com
+Password: rain
+Nickname: rainy
+Income: 90000.0
+Electricity Due Date: N/A
+Water Due Date: N/A
+Rent Due Date: N/A
+Internet Due Date: N/A
