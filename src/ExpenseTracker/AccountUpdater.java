@@ -48,30 +48,6 @@ public class AccountUpdater extends Update {
         }
     }
     
-    /**public void changeEmail() { 
-        System.out.println("Enter new email : ");
-        String newEmail = s.nextLine();
-        
-        update.setNewEmail(newEmail);
-        s.nextLine();
-
-        if (!verifyEmail()) {
-            return; 
-        }
-
-        if (!verifyPassword()) {
-            return; 
-        }
-
-        System.out.print("Are you sure you want to change your email? (y/n): ");
-        String confirmation = s.nextLine().toLowerCase().trim();
-
-        if (confirmation.charAt(0) == 'y') {
-            update.ChangeEmail();
-        } else {
-            System.out.println("Changing account email cancelled.");
-        }
-    }**/
 
     public void changePassword() {
         System.out.print("Enter new password: ");
