@@ -31,6 +31,8 @@ public class TermsAndConditions extends menu {
         System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
         System.out.println("\tPress Enter to continue...");
         s.nextLine(); 
-        s.close();  
+        //s.close();  
+
+        //if okay na lahat ng condition dapat may lalabaas na do you accept terms and condiitons
     }
 }

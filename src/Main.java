@@ -5,7 +5,6 @@ import ExpenseTracker.login;
 import display.ClearScreen;
 import display.LoadingMenu;
 import display.MyAccount;
-import display.TermsAndConditions;
 import display.UserMenu;
 import display.asciiArt;
 import display.intro;
@@ -27,7 +26,7 @@ public class Main {
         //String registeredEmail, registeredPassword;
         //String electricityDate, waterDate, rentDate, internetDate;
 
-        TermsAndConditions terms = new TermsAndConditions();
+        //TermsAndConditions terms = new TermsAndConditions();
         mainmenu mainmenu = new mainmenu();
         LoadingMenu load = new LoadingMenu();
         ClearScreen clr = new ClearScreen();

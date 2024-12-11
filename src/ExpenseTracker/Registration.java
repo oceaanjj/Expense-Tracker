@@ -1,5 +1,6 @@
 package ExpenseTracker;
 
+import display.TermsAndConditions;
 import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -68,6 +69,8 @@ public class Registration {
 
     private double getIncome() {
         while (true) {
+            TermsAndConditions termsAndConditions = new TermsAndConditions();
+            termsAndConditions.display();
             System.out.print("Enter your monthly income: ");
             try {
                 return Double.parseDouble(s.nextLine());
