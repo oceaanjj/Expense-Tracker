@@ -1,6 +1,7 @@
-package DISPLAY;
+package display;
 
 public class UserMenu extends menu {
+    @Override
     public void display() {
         System.out.println("[1] MY ACCOUNT");
         System.out.println("[2] EXPENSE TRACKER");

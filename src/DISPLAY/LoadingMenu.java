@@ -1,4 +1,4 @@
-package DISPLAY;
+package display;
 
 
 public class LoadingMenu {

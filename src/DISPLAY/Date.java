@@ -1,4 +1,4 @@
-package DISPLAY;
+package display;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;   

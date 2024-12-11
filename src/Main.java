@@ -1,15 +1,15 @@
-import DISPLAY.ClearScreen;
-import DISPLAY.LoadingMenu;
-import DISPLAY.MyAccount;
-import DISPLAY.TermsAndConditions;
-import DISPLAY.UserMenu;
-import DISPLAY.asciiArt;
-import DISPLAY.intro;
-import DISPLAY.mainmenu;
 import ExpenseTracker.AccountDeleter;
 import ExpenseTracker.AccountUpdater;
 import ExpenseTracker.Registration;
 import ExpenseTracker.login;
+import display.ClearScreen;
+import display.LoadingMenu;
+import display.MyAccount;
+import display.TermsAndConditions;
+import display.UserMenu;
+import display.asciiArt;
+import display.intro;
+import display.mainmenu;
 import java.util.*;
 
 public class Main {
@@ -50,7 +50,7 @@ public class Main {
         load.loading();
         clr.clearScreen();
 
-        //intro.display(); 
+        intro.display(); 
         //may error sa intro.display
 
         

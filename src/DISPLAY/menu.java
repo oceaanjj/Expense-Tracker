@@ -1,4 +1,4 @@
-package DISPLAY;
+package display;
 
 
 public abstract class menu {

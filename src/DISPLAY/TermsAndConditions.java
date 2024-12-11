@@ -1,10 +1,10 @@
-package DISPLAY;
+package display;
 
 
 import java.util.Scanner;
 
 public class TermsAndConditions extends menu {
-    
+    @Override
     public void display() {
         Scanner s = new Scanner(System.in);
         System.out.println("╔══════════════════════════════════════════════════════════════════════════════════════════════════════════════╗");

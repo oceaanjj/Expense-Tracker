@@ -1,6 +1,7 @@
-package DISPLAY;
+package display;
 
 public class asciiArt extends menu {
+    @Override
     public void display() {
                 System.out.println();
                 System.out.println("\t\t         __,---.__");
