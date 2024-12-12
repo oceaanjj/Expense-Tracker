@@ -56,7 +56,7 @@ public class AccountEditor {
 
 
     public void ChangeEmail() {
-        String directory = System.getProperty("user.dir") + "/src/database";
+        String directory = System.getProperty("user.dir") + "/src/database/accounts";
         File oldFileName = new File(directory, getEmail() + ".txt");  
 
         if (oldFileName.exists()) {
@@ -83,7 +83,7 @@ public class AccountEditor {
     }
 
     public void ChangePassword() {
-        String directory = System.getProperty("user.dir") + "/src/database";
+        String directory = System.getProperty("user.dir") + "/src/database/accounts";
         File file = new File(directory, getEmail() + ".txt");
 
         if (file.exists()) {
@@ -104,7 +104,7 @@ public class AccountEditor {
     }
 
     public void ChangeIncome() {
-        String directory = System.getProperty("user.dir") + "/src/database";
+        String directory = System.getProperty("user.dir") + "/src/database/accounts";
         File file = new File(directory, getEmail() + ".txt");
 
         if (file.exists()) {

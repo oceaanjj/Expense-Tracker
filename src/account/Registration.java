@@ -118,66 +118,77 @@ public class Registration {
     }
 
     private String getAccountFilePath(String email) {
-        String baseDir = System.getProperty("user.dir") + "/src/database";
+        String baseDir = System.getProperty("user.dir") + "/src/database/accounts";
         return baseDir + "/" + email + ".txt";
     }
 
     private void saveAccountDetails() {
         try {
-            File folder = new File(System.getProperty("user.dir") + "/src/database");
-            if (!folder.exists() && !folder.mkdirs()) {
+            File accountsFolder = new File(System.getProperty("user.dir") + "/src/database/accounts");
+            File savingsFolder = new File(System.getProperty("user.dir") + "/src/database/savings");
+    
+            if (!accountsFolder.exists() && !accountsFolder.mkdirs()) {
                 System.out.println("Failed to create accounts directory.");
                 return;
             }
-
+    
+            if (!savingsFolder.exists() && !savingsFolder.mkdirs()) {
+                System.out.println("Failed to create savings directory.");
+                return;
+            }
+    
             File accountFile = new File(getAccountFilePath(email));
             if (accountFile.exists()) {
                 System.out.println("Account file already exists. Cannot overwrite.");
                 return;
             }
-
+    
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(accountFile))) {
                 writer.write(email + "\n");
                 writer.write(password + "\n");
                 writer.write(nickname + "\n");
                 writer.write(income + "\n");
-
+    
                 if (electricityDueDate != null) {
                     writer.write(electricityDueDate + "\n");
-                }
-                else {
+                } else {
                     writer.write("N/A\n");
                 }
-
+    
                 if (waterDueDate != null) {
                     writer.write(waterDueDate + "\n");
-                }
-                else {
+                } else {
                     writer.write("N/A\n");
                 }
-
+    
                 if (rentDueDate != null) {
                     writer.write(rentDueDate + "\n");
-                }
-                else {
+                } else {
                     writer.write("N/A\n");
                 }
-
-
+    
                 if (internetDueDate != null) {
                     writer.write(internetDueDate + "\n");
-                }
-                else {
+                } else {
                     writer.write("N/A\n");
                 }
-
-            
             }
-
+    
+            File savingsFile = new File(savingsFolder, email + ".txt");
+            if (!savingsFile.exists()) {
+                if (savingsFile.createNewFile()) {
+                    System.out.println("Savings file successfully created!");
+                } else {
+                    System.out.println("Failed to create savings file.");
+                }
+            }
+    
             System.out.println("Account successfully created!");
-
+    
         } catch (IOException e) {
-            System.out.println("Failed Create Account. Please try again.");
+            System.out.println("Failed to create account or savings file. Please try again.");
         }
     }
+    
 }
+

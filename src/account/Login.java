@@ -31,7 +31,7 @@ public class Login {
         
 
         //change niyo path into windows if hindi gumagana login (Account doesn't exist ket meron) 
-        String directory = System.getProperty("user.dir") + "/src/database";
+        String directory = System.getProperty("user.dir") + "/src/database/accounts";
         File file = new File(directory, getEmail() + ".txt"); 
 
        

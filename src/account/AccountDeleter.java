@@ -20,7 +20,7 @@ public class AccountDeleter extends AccountEditor {
     }
 
     private void deleteFile() {
-        String directory = System.getProperty("user.dir") + "/src/database";
+        String directory = System.getProperty("user.dir") + "/src/database/accounts";
         File fileToDelete = new File(directory, getEmail() + ".txt");
 
         if (fileToDelete.exists()) {

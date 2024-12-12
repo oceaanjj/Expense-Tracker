@@ -40,14 +40,14 @@ public class Verification {
     }
 
     private boolean isCorrectEmail(AccountEditor account) {
-        String directory = System.getProperty("user.dir") + "/src/database";
+        String directory = System.getProperty("user.dir") + "/src/database/accounts";
         File file = new File(directory, account.getEmail() + ".txt");
 
         return file.exists();
     }
 
     private boolean isCorrectPassword(AccountEditor account) {
-        String directory = System.getProperty("user.dir") + "/src/database";
+        String directory = System.getProperty("user.dir") + "/src/database/accounts";
         File file = new File(directory, account.getEmail() + ".txt");
     
         try {

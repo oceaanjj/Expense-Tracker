@@ -39,8 +39,7 @@ public class Needs{
             amount = s.nextInt();
             s.nextLine();
 
-            
-
+        
             System.out.println("Enter Description: ");
             description = s.nextLine();
 
