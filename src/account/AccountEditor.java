@@ -1,4 +1,4 @@
-package ExpenseTracker;
+package account;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,7 +6,7 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TextFileModifier {
+public class AccountEditor {
     private String email;
     private String password;
     private double monthlyIncome;
@@ -56,7 +56,7 @@ public class TextFileModifier {
 
 
     public void ChangeEmail() {
-        String directory = System.getProperty("user.dir") + "/src/ExpenseTracker/ACCOUNTS";
+        String directory = System.getProperty("user.dir") + "/src/database";
         File oldFileName = new File(directory, getEmail() + ".txt");  
 
         if (oldFileName.exists()) {
@@ -83,7 +83,7 @@ public class TextFileModifier {
     }
 
     public void ChangePassword() {
-        String directory = System.getProperty("user.dir") + "/src/ExpenseTracker/ACCOUNTS";
+        String directory = System.getProperty("user.dir") + "/src/database";
         File file = new File(directory, getEmail() + ".txt");
 
         if (file.exists()) {
@@ -104,7 +104,7 @@ public class TextFileModifier {
     }
 
     public void ChangeIncome() {
-        String directory = System.getProperty("user.dir") + "/src/ExpenseTracker/ACCOUNTS";
+        String directory = System.getProperty("user.dir") + "/src/database";
         File file = new File(directory, getEmail() + ".txt");
 
         if (file.exists()) {

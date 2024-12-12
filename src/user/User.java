@@ -1,9 +1,9 @@
-package ExpenseTracker;
+package user;
 
 
 import java.util.Scanner;
 
-public class User extends TemporaryDatabase{
+public class User {
     Scanner in = new Scanner(System.in);
 
     // under EXPENSE TRACKER SIYA SA MAIN 

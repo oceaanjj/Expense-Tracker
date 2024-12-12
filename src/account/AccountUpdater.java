@@ -1,8 +1,8 @@
-package ExpenseTracker;
+package account;
 
 import java.util.Scanner;
 
-public class AccountUpdater extends TextFileModifier {
+public class AccountUpdater extends AccountEditor {
     private final Verification verifier = new Verification();
     private final Scanner s = new Scanner(System.in);
     private final Confirmation confirm = new Confirmation();

@@ -1,4 +1,4 @@
-package ExpenseTracker;
+package account;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class Verification {  
     private final Scanner scanner = new Scanner(System.in);
 
-    public boolean verifyEmail(TextFileModifier account) {
+    public boolean verifyEmail(AccountEditor account) {
         while (true) {
             System.out.print("Enter your registered email: ");
             String inputEmail = scanner.nextLine();
@@ -24,7 +24,7 @@ public class Verification {
         }
     }
 
-    public boolean verifyPassword(TextFileModifier account) {
+    public boolean verifyPassword(AccountEditor account) {
         while (true) {
             System.out.print("Enter your account password: ");
             String inputPassword = scanner.nextLine();
@@ -39,15 +39,15 @@ public class Verification {
         }
     }
 
-    private boolean isCorrectEmail(TextFileModifier account) {
-        String directory = System.getProperty("user.dir") + "/src/ExpenseTracker/ACCOUNTS";
+    private boolean isCorrectEmail(AccountEditor account) {
+        String directory = System.getProperty("user.dir") + "/src/database";
         File file = new File(directory, account.getEmail() + ".txt");
 
         return file.exists();
     }
 
-    private boolean isCorrectPassword(TextFileModifier account) {
-        String directory = System.getProperty("user.dir") + "/src/ExpenseTracker/ACCOUNTS";
+    private boolean isCorrectPassword(AccountEditor account) {
+        String directory = System.getProperty("user.dir") + "/src/database";
         File file = new File(directory, account.getEmail() + ".txt");
     
         try {

@@ -1,4 +1,4 @@
-package ExpenseTracker;
+package account;
 
 import java.util.Scanner;
 

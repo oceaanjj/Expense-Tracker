@@ -1,4 +1,4 @@
-package ExpenseTracker;
+package account;
 
 import display.TermsAndConditions;
 import java.io.*;
@@ -118,13 +118,13 @@ public class Registration {
     }
 
     private String getAccountFilePath(String email) {
-        String baseDir = System.getProperty("user.dir") + "/src/ExpenseTracker/ACCOUNTS";
+        String baseDir = System.getProperty("user.dir") + "/src/database";
         return baseDir + "/" + email + ".txt";
     }
 
     private void saveAccountDetails() {
         try {
-            File folder = new File(System.getProperty("user.dir") + "/src/ExpenseTracker/ACCOUNTS");
+            File folder = new File(System.getProperty("user.dir") + "/src/database");
             if (!folder.exists() && !folder.mkdirs()) {
                 System.out.println("Failed to create accounts directory.");
                 return;

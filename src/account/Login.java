@@ -1,4 +1,4 @@
-package ExpenseTracker;
+package account;
 
 
 import java.io.BufferedReader;
@@ -7,7 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class login {
+public class Login {
     private String email;
     private String password;
   
@@ -34,7 +34,7 @@ public class login {
         
 
         //change niyo path into windows if hindi gumagana login (Account doesn't exist ket meron) 
-        String directory = System.getProperty("user.dir") + "/src/ExpenseTracker/ACCOUNTS";
+        String directory = System.getProperty("user.dir") + "/src/database";
         File file = new File(directory, getEmail() + ".txt"); 
 
        

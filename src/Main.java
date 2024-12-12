@@ -1,7 +1,7 @@
-import ExpenseTracker.AccountDeleter;
-import ExpenseTracker.AccountUpdater;
-import ExpenseTracker.Registration;
-import ExpenseTracker.login;
+import account.AccountDeleter;
+import account.AccountUpdater;
+import account.Login;
+import account.Registration;
 import display.ClearScreen;
 import display.LoadingMenu;
 import display.MyAccount;
@@ -16,7 +16,7 @@ public class Main {
      * upate case 4 in account delete
      * 
      * */
-    public static void main(String[] args) {
+    public static void main (String[] args) {
         Scanner s = new Scanner(System.in);
         String email, password; //nickname = "";
         //double income = 0.0;
@@ -32,7 +32,7 @@ public class Main {
         ClearScreen clr = new ClearScreen();
         Registration register = new Registration();
         //TemporaryDatabase db = new TemporaryDatabase();
-        login login = new login();
+        Login login = new Login();
         asciiArt art = new asciiArt();
         intro intro = new intro();
         UserMenu userMenu = new UserMenu();

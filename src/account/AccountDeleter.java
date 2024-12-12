@@ -1,7 +1,7 @@
-package ExpenseTracker;
+package account;
 
 import java.io.File;
-public class AccountDeleter extends TextFileModifier {
+public class AccountDeleter extends AccountEditor {
     private final Verification verifier = new Verification();
     private final Confirmation confirm = new Confirmation();
 
@@ -20,7 +20,7 @@ public class AccountDeleter extends TextFileModifier {
     }
 
     private void deleteFile() {
-        String directory = System.getProperty("user.dir") + "/src/ExpenseTracker/ACCOUNTS";
+        String directory = System.getProperty("user.dir") + "/src/database";
         File fileToDelete = new File(directory, getEmail() + ".txt");
 
         if (fileToDelete.exists()) {
