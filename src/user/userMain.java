@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class userMain {
 
-    public void startExpenseTracker(Savings savings) {
+    public void startExpenseTracker(Savings savings, Needs needs) {
         Scanner s = new Scanner(System.in);
         System.out.println("START TRACKING YOUR EXPENSES");
         System.out.println("[1] NEEDS");
@@ -15,7 +15,7 @@ public class userMain {
 
         switch (choice) {
             case 1:
-                Needs needs = new Needs();
+                //Needs needs = new Needs();
                 needs.needs();
                 break;
             case 2:

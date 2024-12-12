@@ -10,6 +10,7 @@ import display.asciiArt;
 import display.intro;
 import display.mainmenu;
 import java.util.*;
+import user.Needs;
 import user.Savings;
 import user.userMain;
 
@@ -44,6 +45,7 @@ public class Main {
         //User user = new User();
         userMain user = new userMain();
         Savings savings = new Savings();
+        Needs needs = new Needs();
         
 
         
@@ -90,6 +92,7 @@ public class Main {
                                 
                                 if (login.userLogin() == true) {
                                     savings.setEmail(login.getEmail());
+                                    needs.setEmail(login.getEmail());
                                     //System.out.println(savings.getEmail());
                                     
                                 
@@ -110,7 +113,7 @@ public class Main {
                                             System.out.println("Enter choice: ");
                                             int accountChoice = s.nextInt();
                                             switch(accountChoice){
-                                                
+
                                                 case 1:
                                                     //change email (medyo done)                                
                                                     updater.changeEmail();
@@ -183,7 +186,7 @@ public class Main {
                             case 2:
                             //System.out.println(savings.getEmail());
                             //savings.addSavings();
-                            user.startExpenseTracker(savings);
+                            user.startExpenseTracker(savings, needs);
                             break;
 
 

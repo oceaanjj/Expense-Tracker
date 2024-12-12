@@ -40,8 +40,8 @@ public class Login {
             try {
                 System.out.print("Enter Email: ");
                 email = s.nextLine().trim();
-                setEmail(email);  // Store email
-                break;  // Break loop once valid email is entered
+                setEmail(email);  
+                break; 
             } catch (Exception e) {
                 System.out.println("Invalid input for email. Please try again.");
             }
@@ -51,33 +51,33 @@ public class Login {
             try {
                 System.out.print("Enter Password: ");
                 password = s.nextLine().trim();
-                setPassword(password);  // Store password
-                break;  // Break loop once valid password is entered
+                setPassword(password);  
+                break;  
             } catch (Exception e) {
                 System.out.println("Invalid input for password. Please try again.");
             }
         }
 
-        // Step 2: Validate login credentials
+    
        validateLogin(email, password);
        return loggedIn;
     }
 
-    // Method to validate the user's credentials from the database (text file)
+    
     private boolean validateLogin(String email, String password) {
         try {
             
-            // Set the directory path for user accounts
+            
             String directory = System.getProperty("user.dir") + "/src/database/accounts";
             File file = new File(directory, email + ".txt");
 
-            // Check if the account file exists
+            
             if (!file.exists()) {
                 System.out.println("Login failed: Account does not exist.");
                 return loggedIn = false;
             }
 
-            // Read the account file
+            
             ArrayList<String> userTxtFile = new ArrayList<>();
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
                 String line;
@@ -86,13 +86,13 @@ public class Login {
                 }
             }
 
-            // Verify account details
+          
             if (userTxtFile.size() >= 2) {
                 String fileEmail = userTxtFile.get(0);
                 String filePassword = userTxtFile.get(1);
 
                 if (fileEmail.equals(email) && filePassword.equals(password)) {
-                    // Set email and password after successful login
+                   
                     setEmail(email);
                     setPassword(password);
                     System.out.println("Login successful!");

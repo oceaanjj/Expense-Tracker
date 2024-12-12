@@ -11,6 +11,9 @@ import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
 
 public class Savings {
+    /**
+     * need read the file and display the savings
+     */
     private String email;
     private Scanner s = new Scanner(System.in);
     private String name;
@@ -63,18 +66,18 @@ public class Savings {
 
     public void addSavings() {
         System.out.println("TRACK YOUR SAVINGS");
-        System.out.println("[1] START NEW SAVINGS CHALLENGE");
-        System.out.println("[2] VIEW EXISTING SAVINGS CHALLENGE");
+        System.out.println("[1] START NEW SAVINGS ");
+        System.out.println("[2] VIEW EXISTING SAVINGS ");
         System.out.println("[3] EXIT");
         System.out.print("Enter your choice: ");
         int choice = s.nextInt();
 
         switch (choice) {
             case 1:
-                startNewSavingsChallenge();
+                startNewSavings();
                 break;
             case 2:
-                viewExistingSavingsChallenge();
+                viewExistingSavings();
                 break;
             case 3:
                 return;
@@ -83,7 +86,7 @@ public class Savings {
         }
     }
 
-    public void startNewSavingsChallenge() {
+    public void startNewSavings() {
         s.nextLine();
         System.out.print("Enter Savings Name (Ex. Tuition): ");
         String savingsName = s.nextLine().trim();
@@ -191,8 +194,8 @@ public class Savings {
 
 
 
-    public void viewExistingSavingsChallenge() {
+    public void viewExistingSavings() {
         System.out.println("VIEW EXISTING SAVINGS CHALLENGE");
-        // Logic for viewing existing savings would go here.
+        
     }
 }
