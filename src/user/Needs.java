@@ -119,10 +119,14 @@ public class Needs{
             File file = new File(directory, email + ".txt");
 
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
-                writer.write(category + ", Amount: " + amount + ", Date: " + date + ", Description: " + description + "\n");
-                System.out.println("Expense saved successfully to " + file.getName());
+                writer.write("\n");
+                writer.write(date);
+                writer.write(category);
+                writer.write(amount);
+                writer.write(description);
+                System.out.println("Expense saved successfully !");
             } catch (IOException e) {
-                System.out.println("Failed to save expense. Error: " + e.getMessage());
+                System.out.println("Failed to save expense.");
             }
         }
 }
