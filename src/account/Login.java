@@ -1,6 +1,5 @@
 package account;
 
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -11,8 +10,6 @@ public class Login {
     private String email;
     private String password;
   
-
-
     public void setEmail(String email) {
         this.email = email;
     }

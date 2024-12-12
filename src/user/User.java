@@ -1,44 +1,39 @@
 package user;
 
-
 import java.util.Scanner;
 
 public class User {
-    Scanner in = new Scanner(System.in);
+    Scanner s = new Scanner(System.in);
+    userMenuDisplay menu = new userMenuDisplay();
+    Needs needs = new Needs();
 
-    // under EXPENSE TRACKER SIYA SA MAIN 
-    
-    
-    public void userMenu() {
-        System.out.println(" Menu ");
-        System.out.println("1. Add Expense");
-        System.out.println("2. View Expenses");
-        System.out.println("3. Delete Expense");
-        System.out.println("4. Calculate Total Expenses");
-        System.out.println("5. Filter Expenses by Date Range");
-        System.out.println("6. Exit");
-    }
+    public void startExpenseTracker() {
 
-    public void addExpense() {
-        System.out.println("Enter Category");
-        System.out.println("[1] Foods ");
-        System.out.println("[2] Transportation ");
-        System.out.println("[3] Utility Bill");
-        System.out.println("[4] Rent");
-        System.out.println("[5] Exit");
-        int choice = in.nextInt();
-
-//then tsaka maglalagay ng addamount kinemberut tsaka babawasan yung income nila
-        switch (choice) {
-            case 1:
-                
-                break;
-            case 2:
-                break;
-            default:
-                break;
+        while(true){
+            menu.display();
+            System.out.println("Enter choice: ");
+            int choice = s.nextInt();
+            
+            switch (choice) {
+                case 1:
+                    needs.addNeeds();
+                    break;
+                case 2:
+                    addSavings();
+                    break;
+                case 3:
+                    addWants();
+                    break;
+                case 4:
+                    return;
+                default:
+                    break;
+            }
         }
     }
+    
+
+   
 
 
 
@@ -47,7 +42,12 @@ public class User {
 
 
 //later na tech focus muna aq sa expense kineme
-    public void Savings(){
+    public void addSavings(){
+        
+    }
+
+
+    public void addWants(){
         
     }
 }
