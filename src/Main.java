@@ -10,7 +10,8 @@ import display.asciiArt;
 import display.intro;
 import display.mainmenu;
 import java.util.*;
-import user.User;
+import user.Savings;
+import user.userMain;
 
 public class Main {
     /***
@@ -40,7 +41,9 @@ public class Main {
         MyAccount myAccount = new MyAccount();
         AccountDeleter delete = new AccountDeleter();
         AccountUpdater updater = new AccountUpdater();
-        User user = new User();
+        //User user = new User();
+        userMain user = new userMain();
+        Savings savings = new Savings();
         
 
         
@@ -82,31 +85,17 @@ public class Main {
                                 //login
                                 clr.clearScreen();
                                 System.out.println("Login");
+                              
 
-                                while (true) {
-                                    try {
-                                        System.out.print("Enter Email: ");
-                                        email = s.nextLine();
-                                        login.setEmail(email);
-                                        break;
-                                    } catch (Exception e) {
-                                        System.out.println("Invalid input for email. Please try again.");
-                                    }
-                                }
+                                
+                                if (login.userLogin() == true) {
+                                    savings.setEmail(login.getEmail());
+                                    //System.out.println(savings.getEmail());
+                                    
+                                
+                                //boolean loginStatus = login.userLogin(login.getEmail(), login.getPassword());
 
-                                while (true) {
-                                        try {
-                                            System.out.print("Enter Password: ");
-                                            password = s.nextLine();
-                                            login.setPassword(password);
-                                            break;
-                                        } catch (Exception e) {
-                                            System.out.println("Invalid input for password. Please try again.");
-                                        }
-                                }
-
-                                boolean loginStatus = login.userLogin(login.getEmail(), login.getPassword());
-                                if (loginStatus) {
+                                
                                     
                                 UserMainMenu : while (true) {
                                     userMenu.display();
@@ -121,6 +110,7 @@ public class Main {
                                             System.out.println("Enter choice: ");
                                             int accountChoice = s.nextInt();
                                             switch(accountChoice){
+                                                
                                                 case 1:
                                                     //change email (medyo done)                                
                                                     updater.changeEmail();
@@ -191,7 +181,9 @@ public class Main {
 
                                                                              
                             case 2:
-                            user.startExpenseTracker();
+                            //System.out.println(savings.getEmail());
+                            //savings.addSavings();
+                            user.startExpenseTracker(savings);
                             break;
 
 
