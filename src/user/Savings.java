@@ -1,5 +1,6 @@
 package user;
 
+import account.Login;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -9,7 +10,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
-import account.Login;
 
 public class Savings {
     Scanner s = new Scanner(System.in);
@@ -108,24 +108,31 @@ public class Savings {
 
     public void saveSavings(String email, String name, double goal, String frequency, LocalDate endDate) {
         final String savingsFolderPath = System.getProperty("user.dir") + "/src/database/savings";
-        File savingsFile = new File(savingsFolderPath, email + "_savings.txt");
-
         File savingsFolder = new File(savingsFolderPath);
+        File savingsFile = new File(savingsFolder, email + "_savings.txt");
+    
+        // Ensure the savings folder exists
         if (!savingsFolder.exists() && !savingsFolder.mkdirs()) {
             System.out.println("Failed to create savings directory.");
             return;
         }
-
+    
+        // Check if the file exists before trying to write
+        if (!savingsFile.exists()) {
+            System.out.println("Error: File for email '" + email + "' does not exist.");
+            return; // Exit the method if the file does not exist
+        }
+    
+        // Append to the existing file
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(savingsFile, true))) {
             writer.write("Savings Name: " + name + "\n");
             writer.write("Goal Amount: " + goal + "\n");
             writer.write("Frequency: " + frequency + "\n");
             writer.write("End Date: " + endDate + "\n");
-            //writer.write("=================================\n");
             System.out.println("Savings entry saved successfully!");
         } catch (IOException e) {
-            System.out.println("Failed to save savings entry. Please try again.");
+            System.out.println("Failed to save savings entry. Error: " + e.getMessage());
         }
-    
     }
+    
 }

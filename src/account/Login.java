@@ -26,51 +26,52 @@ public class Login {
         return password;
     }
 
-   public boolean userLogin(String email, String password) {
-    try {
-        
-
-        //change niyo path into windows if hindi gumagana login (Account doesn't exist ket meron) 
-        String directory = System.getProperty("user.dir") + "/src/database/accounts";
-        File file = new File(directory, getEmail() + ".txt"); 
-
-       
-        if (!file.exists()) {
-            System.out.println("Login failed : Account does not exist.");
-            return false;
-        }
-
-        ArrayList<String> userTxtFile;
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            userTxtFile = new ArrayList<>();
-            String line;
-            while ((line = reader.readLine()) != null) {
-                userTxtFile.add(line.trim());
-            }
-        }
-
-  
-        if (userTxtFile.size() >= 2) {
-            String fileEmail = userTxtFile.get(0);
-            String filePassword = userTxtFile.get(1); 
-          
-
-            if (fileEmail.equals(getEmail()) && filePassword.equals(getPassword())) {
-                System.out.println("Login successful!");
-                return true;
-            } else {
-                System.out.println("Login failed: Incorrect email or password.");
+    public boolean userLogin(String email, String password) {
+        try {
+            // Set the directory path for user accounts
+            String directory = System.getProperty("user.dir") + "/src/database/accounts";
+            File file = new File(directory, email + ".txt");
+    
+            // Check if the account file exists
+            if (!file.exists()) {
+                System.out.println("Login failed: Account does not exist.");
                 return false;
             }
-        } else {
-            System.out.println("Account file is corrupted or incomplete.");
+    
+            // Read the account file
+            ArrayList<String> userTxtFile = new ArrayList<>();
+            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    userTxtFile.add(line.trim());
+                }
+            }
+    
+            // Verify account details
+            if (userTxtFile.size() >= 2) {
+                String fileEmail = userTxtFile.get(0);
+                String filePassword = userTxtFile.get(1);
+    
+                if (fileEmail.equals(email) && filePassword.equals(password)) {
+                    // Set email and password after successful login
+                    setEmail(email);
+                    setPassword(password);
+                    System.out.println("Login successful!");
+                    return true;
+                } else {
+                    System.out.println("Login failed: Incorrect email or password.");
+                    return false;
+                }
+            } else {
+                System.out.println("Account file is corrupted or incomplete.");
+                return false;
+            }
+        } catch (IOException e) {
+            System.out.println("Login failed: Error occurred.");
             return false;
         }
-    } catch (IOException e) {
-        System.out.println("Login failed : Error occurred.");
-        return false;
     }
-}
+    
 
     
     

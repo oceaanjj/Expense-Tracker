@@ -10,6 +10,7 @@ import display.asciiArt;
 import display.intro;
 import display.mainmenu;
 import java.util.*;
+import user.User;
 
 public class Main {
     /***
@@ -39,6 +40,7 @@ public class Main {
         MyAccount myAccount = new MyAccount();
         AccountDeleter delete = new AccountDeleter();
         AccountUpdater updater = new AccountUpdater();
+        User user = new User();
         
 
         
@@ -187,17 +189,10 @@ public class Main {
                                         
                                         
 
-                                        /** 
-                                         * 
-                                         * 
-                                         *  BRYAN - EXPENSE TRACKER  
-                                         * 
-                                         * 
-                                         * 
-                                         * */                                       
-                                        case 2:
-                                            //expense tracker
-                                            break;
+                                                                             
+                            case 2:
+                            user.startExpenseTracker();
+                            break;
 
 
                                         case 3:
