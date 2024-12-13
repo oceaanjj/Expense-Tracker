@@ -12,7 +12,8 @@ public class Needs {
     /**
      * KULANG :
      * if it is the first day of the month the text file of the user will be updated to all false again.
-     * all their bills will be set to unpaid again, and also their income will add again the remaining the balance 
+     * all their bills will be set to unpaid again, and also their income,after logged in dapat may mag aask lagi ng 
+     * 'DO YOU WANT TO ENTER YOUR INCOME FOR THIS MONTH ? if ' will add again the remaining the balance 
      */
     private String email;
     private double food;

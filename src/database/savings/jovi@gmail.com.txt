@@ -1,0 +1,5 @@
+Savings Name: tuition
+Goal Amount: 900.0
+Frequency: weekly
+End Date: 2025-09-09
+---------------

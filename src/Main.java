@@ -16,7 +16,8 @@ import user.userMain;
 
 public class Main {
     /***
-     * upate case 4 in account delete
+     * KULANG :
+     * TRY AND CATCH SA IBANG PARTS NG CODE NAG EERROR DAPAT KAPAG INVALID INPUT TAS BABALIK, MAGAASK AGAIN
      * 
      * */
     public static void main (String[] args) {
