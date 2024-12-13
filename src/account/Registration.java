@@ -126,6 +126,8 @@ public class Registration {
         try {
             File accountsFolder = new File(System.getProperty("user.dir") + "/src/database/accounts");
             File savingsFolder = new File(System.getProperty("user.dir") + "/src/database/savings");
+            File needsFolder = new File(System.getProperty("user.dir") + "/src/database/needs");
+            File wantsFolder = new File(System.getProperty("user.dir") + "/src/database/wants");
     
             if (!accountsFolder.exists() && !accountsFolder.mkdirs()) {
                 System.out.println("Failed to create accounts directory.");
@@ -133,6 +135,16 @@ public class Registration {
             }
     
             if (!savingsFolder.exists() && !savingsFolder.mkdirs()) {
+                System.out.println("Failed to create savings directory.");
+                return;
+            }
+
+            if (!wantsFolder.exists() && !wantsFolder.mkdirs()) {
+                System.out.println("Failed to create savings directory.");
+                return;
+            }
+
+            if (!needsFolder.exists() && !needsFolder.mkdirs()) {
                 System.out.println("Failed to create savings directory.");
                 return;
             }
@@ -172,14 +184,52 @@ public class Registration {
                 } else {
                     writer.write("N/A\n");
                 }
+
+                writer.write("false\n"); 
+                writer.write("false\n"); 
+                writer.write("false\n"); 
+                writer.write("false\n"); 
             }
     
             File savingsFile = new File(savingsFolder, email + ".txt");
             if (!savingsFile.exists()) {
                 if (savingsFile.createNewFile()) {
-                    System.out.println("Savings file successfully created!");
+                    //System.out.println("Savings file successfully created!");
                 } else {
-                    System.out.println("Failed to create savings file.");
+                    //System.out.println("Failed to create savings file.");
+                }
+            }
+
+            File needsFile = new File(needsFolder, email + ".txt");
+            if (!needsFile.exists()) {
+                if (needsFile.createNewFile()) {
+                    //System.out.println("Savings file successfully created!");
+                } else {
+                    //System.out.println("Failed to create savings file.");
+                }
+            }
+
+            try(BufferedWriter writer = new BufferedWriter(new FileWriter(needsFile, true))){
+
+            //writer.write("Needs\n");
+                writer.write("+-------------------------------------------------------------------------+\n");
+                writer.write("| Detail               | Amount          | Information                    |\n");
+                writer.write("+-------------------------------------------------------------------------+\n");
+
+                
+
+
+            } catch (IOException e) {
+                System.out.println("Failed to create needs file.");
+            }
+
+
+            File wantsFile = new File(wantsFolder, email + ".txt");
+            if (!wantsFile.exists()) {
+                if (wantsFile.createNewFile()) {
+                    //System.out.println("Savings file successfully created!");
+                } else {
+                    //System.out.println("Failed to create savings file.");
                 }
             }
     

@@ -12,13 +12,16 @@ import java.util.Scanner;
 
 public class Savings {
     /**
-     * need read the file and display the savings
+     * need read the file and display the savings and need to be deleted also when the account is deleted
      */
     private String email;
     private Scanner s = new Scanner(System.in);
     private String name;
     private double goal;
     private String frequency;
+    LocalDate today = LocalDate.now();
+    LocalDate endDate;
+    long totalPeriods;
     //private String endDateStr;
     //private LocalDate endDate;
 
@@ -125,8 +128,7 @@ public class Savings {
             }
         }
 
-        LocalDate today = LocalDate.now();
-        LocalDate endDate;
+        
         while (true) {
             System.out.print("Enter Date to finish (YYYY-MM-DD): ");
             String endDateStr = s.nextLine().trim();
@@ -143,7 +145,7 @@ public class Savings {
             }
         }
 
-        long totalPeriods;
+       
         switch (getFrequency()) {
             case "daily":
                 totalPeriods = ChronoUnit.DAYS.between(today, endDate);

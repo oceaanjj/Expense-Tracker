@@ -10,12 +10,15 @@ import java.util.ArrayList;
 import java.util.Scanner;
 public class Needs {
     /**
-     * need to stop the due date reminder if the user already paid the bill in utilities
+     * KULANG :
+     * if it is the first day of the month the text file of the user will be updated to all false again.
+     * all their bills will be set to unpaid again, and also their income will add again the remaining the balance 
      */
     private String email;
     private double food;
     private double transportation;
     private double bills;
+    //boolean status;
 
     public void setFood(double food) {
         this.food = food;
@@ -70,6 +73,7 @@ public class Needs {
                         System.out.print("Enter name (e.g. fries, burger etc.) : ");
                         s.nextLine();
                         String name = s.nextLine();
+                        updateUserFile("Food", food, name);
 
                         updateUserIncome(userIncome() - getFood());
                         break;
@@ -83,8 +87,10 @@ public class Needs {
                         String name1 = s.nextLine();
 
                         updateUserIncome(userIncome() - getTransportation());
+                        updateUserFile("Transportation", transportation, name1);
                         break;
                     case 3:
+                        //paid = false;
                         System.out.println("BILLS");
                         System.out.println("[1] ELECTRICITY");
                         System.out.println("[2] WATER");
@@ -101,6 +107,8 @@ public class Needs {
                                                 double bills = s.nextDouble();
                                                 setBills(bills);
                                                 updateUserIncome(userIncome() - getBills());
+                                                updateBillStatus("ElectricityPaid", true);
+                                                updateUserFile("Electricity", bills, "N/A");
                                                 s.nextLine();
                                                 break;
                                             case 2:
@@ -109,21 +117,29 @@ public class Needs {
                                                 bills = s.nextDouble();
                                                 setBills(bills);
                                                 updateUserIncome(userIncome() - getBills());
+                                                updateBillStatus("WaterPaid", true);
+                                                updateUserFile("Water", bills, "N/A");
+                                                
+                                                
                                                 break;
                                             case 3:
                                                 System.out.println("INTERNET");
                                                 System.out.print("Enter the amount you spent on internet : ");
                                                 bills = s.nextDouble();
                                                 setBills(bills);
+                                                updateBillStatus("InternetPaid", true);
                                                 updateUserIncome(userIncome() - getBills());
+                                                updateUserFile("Internet", bills, "N/A");
                                                 break;
                                             case 4:
                                                 System.out.println("RENT");
                                                 System.out.print("Enter the amount you spent on rent : ");
                                                 bills = s.nextDouble();
                                                 setBills(bills);
+                                                updateBillStatus("RentPaid", true);
                                                 updateUserIncome(userIncome() - getBills());
-
+                                                updateUserFile("Rent", bills, "N/A");
+                                               
                                                 break;
                                             case 5:
                                                 System.out.println("EXIT");
@@ -142,6 +158,10 @@ public class Needs {
     }//end of loop
     
 }
+
+    /*boolean isPaid(){
+        return paid;
+    }*/
 
 
     public double userIncome() {
@@ -230,7 +250,96 @@ public class Needs {
         }
 
             
+    private void updateBillStatus(String billType, boolean status) {
+            String directory = System.getProperty("user.dir") + "/src/database/accounts";
+            File file = new File(directory, getEmail() + ".txt");
+        
+            if (!file.exists()) {
+                System.out.println("Account does not exist.");
+                return;
+            }
+        
+            ArrayList<String> userTxtFile = new ArrayList<>();
+            
+            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    userTxtFile.add(line.trim());
+                }
+            } catch (IOException ex) {
+                System.out.println("Error reading file.");
+                return;
+            }
+        
+            int statusIndex = -1;
+            switch (billType) {
+                case "ElectricityPaid":
+                    statusIndex = 8; 
+                    break;
+                case "WaterPaid":
+                    statusIndex = 9;
+                    break;
+                case "InternetPaid":
+                    statusIndex = 10;
+                    break;
+                case "RentPaid":
+                    statusIndex = 11;
+                    break;
+            }
+        
+            if (statusIndex >= 0 && statusIndex < userTxtFile.size()) {
+                userTxtFile.set(statusIndex, String.valueOf(status)); 
+            }
+        
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+                for (String line : userTxtFile) {
+                    writer.write(line);
+                    writer.newLine();
+                }
+            } catch (IOException e) {
+                System.out.println("Error writing to file.");
+            }
+        }
 
+
+        private void updateUserFile(String detailType, double amount, String additionalInfo) {
+            String directory = System.getProperty("user.dir") + "/src/database/needs";
+            File file = new File(directory, getEmail() + ".txt");
+        
+            if (!file.exists()) {
+                System.out.println("Account does not exist.");
+                return;
+            }
+        
+            ArrayList<String> userTxtFile = new ArrayList<>();
+            
+            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    userTxtFile.add(line.trim());
+                }
+            } catch (IOException ex) {
+                System.out.println("Error reading file.");
+                return;
+            }
+        
+            // Append the new row
+            String newRow = String.format("| %-20s | %-15.2f | %-30s |", detailType, amount, additionalInfo);
+            userTxtFile.add(newRow);
+        
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+                for (String line : userTxtFile) {
+                    writer.write(line);
+                    writer.newLine();
+                }
+            } catch (IOException e) {
+                System.out.println("Error writing to file.");
+            }
+        
+            System.out.println(detailType + " has been successfully added to the table.");
+        }
+        
+        
     
 }
 
