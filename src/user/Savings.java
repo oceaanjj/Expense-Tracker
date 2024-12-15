@@ -65,7 +65,7 @@ public class Savings {
         File savingsFile = new File(savingsFolderPath, email + ".txt");
 
         if (savingsFile.exists() && savingsFile.length() > 0) {
-            // If savings file exists and is not empty, allow the user to add to existing savings
+        
             System.out.println("[2] ADD TO EXISTING SAVINGS");
         }
             System.out.println("[3] BACK");
@@ -155,21 +155,16 @@ public class Savings {
         }
     
         try {
-            // Check if the file is empty or missing the header
-            //boolean headerMissing = true;
+         
             if (savingsFile.exists()) {
                 try (BufferedReader reader = new BufferedReader(new FileReader(savingsFile))) {
                     String firstLine = reader.readLine();
-                   /* if (firstLine != null && firstLine.contains("Savings Name")) {
-                        headerMissing = false;
-                    }*/
+                  
                 }
             }
     
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(savingsFile, true))) {
-                // Write the header if missing
                 
-                // Determine the status
                 String status;
                 if (savedSoFar >= getGoal()) {
                     status = "Goal Achieved";
@@ -177,7 +172,7 @@ public class Savings {
                     status = "On Going";
                 }
         
-                // Write the savings entry
+                
                 writer.write(String.format("| %-20s | %-15.2f | %-15.2f | %-15s | %-15s | %-15s |\n",
                         getName(), getGoal(), savedSoFar, getFrequency(), endDate, status));
                 System.out.println("Savings entry saved successfully!");
@@ -209,21 +204,21 @@ public class Savings {
             return;
         }
     
-        // Extract savings names and filter out "Goal Achieved"
+   
         List<String> savingsNames = new ArrayList<>();
         List<String[]> savingsData = new ArrayList<>();
         for (String line : fileLines) {
             if (line.startsWith("+") || line.startsWith("| Savings Name")) {
-                // Skip header or separator lines
+                
                 continue;
             }
             if (line.startsWith("|")) {
                 String[] parts = line.split("\\|");
                 String savingsName = parts[1].trim();
-                String status = parts[6].trim(); // Status column
+                String status = parts[6].trim(); 
                 if (!"Goal Achieved".equalsIgnoreCase(status)) {
                     savingsNames.add(savingsName);
-                    savingsData.add(parts); // Add full row data for processing
+                    savingsData.add(parts);
                 }
             }
         }
@@ -233,7 +228,7 @@ public class Savings {
             return;
         }
     
-        // Display choices
+
         System.out.println("Choose a savings to add to:");
         for (int i = 0; i < savingsNames.size(); i++) {
             System.out.println("[" + (i + 1) + "] " + savingsNames.get(i));
@@ -280,7 +275,7 @@ public class Savings {
     }
     
 
-// Generate suggestion based on remaining balance and end date
+
 private String generateSuggestion(double remaining, double savedSoFar, String frequency, String endDate) {
     LocalDate today = LocalDate.now();
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -295,10 +290,10 @@ private String generateSuggestion(double remaining, double savedSoFar, String fr
         return "The end date has passed. Please review your savings plan.";
     }
 
-    double dailyTarget = remaining / Math.max(1, daysRemaining); // Prevent division by zero
-    double weeklyTarget = dailyTarget * 7; // Calculate for weekly contributions
+    double dailyTarget = remaining / Math.max(1, daysRemaining); 
+    double weeklyTarget = dailyTarget * 7; 
 
-    // Provide suggestions based on frequency
+ 
     if (frequency.equalsIgnoreCase("daily")) {
         return String.format(
                 "You need to save approximately %.2f daily to reach your goal by %s. Keep pushing forward!",
@@ -309,13 +304,12 @@ private String generateSuggestion(double remaining, double savedSoFar, String fr
                 weeklyTarget, targetDate);
     } else if (frequency.equalsIgnoreCase("monthly")) {
         long monthsRemaining = ChronoUnit.MONTHS.between(today, targetDate);
-        double monthlyTarget = remaining / Math.max(1, monthsRemaining); // Prevent division by zero
+        double monthlyTarget = remaining / Math.max(1, monthsRemaining); 
         return String.format(
                 "You need to save approximately %.2f monthly to achieve your goal by %s. Keep going!",
                 monthlyTarget, targetDate);
     }
 
-    // General fallback suggestion
     return "You're on track! Keep saving to achieve your goal by " + targetDate + ".";
 }
 
