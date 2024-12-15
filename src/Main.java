@@ -12,6 +12,7 @@ import display.mainmenu;
 import java.util.*;
 import user.Needs;
 import user.Savings;
+import user.Wants;
 import user.userMain;
 
 public class Main {
@@ -47,6 +48,7 @@ public class Main {
         userMain user = new userMain();
         Savings savings = new Savings();
         Needs needs = new Needs();
+        Wants wants = new Wants();
         
 
         
@@ -94,6 +96,7 @@ public class Main {
                                 if (login.userLogin() == true) {
                                     savings.setEmail(login.getEmail());
                                     needs.setEmail(login.getEmail());
+                                    wants.setEmail(login.getEmail());
                                     //System.out.println(savings.getEmail());
                                     
                                 
@@ -187,7 +190,7 @@ public class Main {
                             case 2:
                             //System.out.println(savings.getEmail());
                             //savings.addSavings();
-                            user.startExpenseTracker(savings, needs);
+                            user.startExpenseTracker(savings, needs, wants);
                             break;
 
 

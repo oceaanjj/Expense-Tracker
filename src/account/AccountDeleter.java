@@ -1,39 +1,44 @@
 package account;
 
 import java.io.File;
+
 public class AccountDeleter extends AccountEditor {
     private final Verification verifier = new Verification();
     private final Confirmation confirm = new Confirmation();
 
     public void deleteAccount() {
-        if (verifier.verifyEmail(this) || verifier.verifyPassword(this)) {
-
+        if (verifier.verifyEmail(this) && verifier.verifyPassword(this)) {
             if (confirm.confirmAction("Are you sure you want to delete your account? (y/n): ")) {
-                deleteFile();
+                deleteAllFiles();
             } else {
                 System.out.println("Account deletion cancelled.");
             }
-        }
-        else {
+        } else {
             System.out.println("Verification failed. Account deletion aborted.");
         }
     }
 
-    private void deleteFile() {
-        String directory = System.getProperty("user.dir") + "/src/database/accounts";
-        File fileToDelete = new File(directory, getEmail() + ".txt");
+    private void deleteAllFiles() {
+        String baseDir = System.getProperty("user.dir");
+        deleteSingleFile(baseDir + "/src/database/accounts/" + getEmail() + ".txt");
+        deleteSingleFile(baseDir + "/src/database/needs/" + getEmail() + ".txt");
+        deleteSingleFile(baseDir + "/src/database/savings/" + getEmail() + ".txt");
+        deleteSingleFile(baseDir + "/src/database/wants/" + getEmail() + ".txt");
+
+        System.out.println("ACCOUNT SUCCESSFULLY DELETED.");
+    }
+
+    private void deleteSingleFile(String filePath) {
+        File fileToDelete = new File(filePath);
 
         if (fileToDelete.exists()) {
             if (fileToDelete.delete()) {
-                System.out.println("Account file deleted successfully.");
+                System.out.println("Deleted file: " + filePath);
             } else {
-                System.out.println("Failed to delete account file. Please try again.");
+                System.out.println("Failed to delete file: " + filePath);
             }
-        }
-        else {
-            System.out.println("Account file not found. Deletion failed.");
+        } else {
+            System.out.println("File not found: " + filePath);
         }
     }
-
-    
 }

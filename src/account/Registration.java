@@ -200,6 +200,24 @@ public class Registration {
                 }
             }
 
+            try(BufferedWriter writer = new BufferedWriter(new FileWriter(savingsFile, true))){
+
+                //writer.write("Needs\n");
+                /*if (savingsFile.length() == 0) {
+                    writer.write("| Savings Name         | Goal Amount     | Saved So Far     | Frequency       | End Date        | Status         |\n");
+                    writer.write("|----------------------|-----------------|------------------|-----------------|-----------------|----------------|\n");
+                }*/
+
+               
+                writer.write("+----------------------+-----------------+------------------+-----------------+-----------------+-------------------+---------------+");
+                writer.write("| Savings Name         | Goal Amount     | Saved So Far     | Frequency       | End Date        | Remaining Balance | Status        |\n");
+                writer.write("+----------------------+-----------------+------------------+-----------------+-----------------+-------------------+---------------+");
+               
+    
+                } catch (IOException e) {
+                    System.out.println("Failed to create needs file.");
+                }
+
             File needsFile = new File(needsFolder, email + ".txt");
             if (!needsFile.exists()) {
                 if (needsFile.createNewFile()) {
@@ -232,6 +250,19 @@ public class Registration {
                     //System.out.println("Failed to create savings file.");
                 }
             }
+
+            try(BufferedWriter writer = new BufferedWriter(new FileWriter(wantsFile, true))){
+
+                //writer.write("Needs\n");
+                    writer.write("+-------------------------------------------------------------------------+\n");
+                    writer.write("| Detail               | Amount          | Information                    |\n");
+                    writer.write("+-------------------------------------------------------------------------+\n");    
+    
+                } catch (IOException e) {
+                    System.out.println("Failed to create needs file.");
+                }
+
+            
     
             System.out.println("Account successfully created!");
     
