@@ -24,20 +24,14 @@ public class Main {
      * */
     public static void main (String[] args) {
         Scanner s = new Scanner(System.in);
-        //String email, password; //nickname = "";
-        //double income = 0.0;
         int choice;
-        //char agree;
-        //String confirmation;
-        //String registeredEmail, registeredPassword;
-        //String electricityDate, waterDate, rentDate, internetDate;
+        
 
         //TermsAndConditions terms = new TermsAndConditions();
         mainmenu mainmenu = new mainmenu();
         LoadingMenu load = new LoadingMenu();
         ClearScreen clr = new ClearScreen();
         Registration register = new Registration();
-        //TemporaryDatabase db = new TemporaryDatabase();
         Login login = new Login();
         asciiArt art = new asciiArt();
         intro intro = new intro();
@@ -45,7 +39,6 @@ public class Main {
         MyAccount myAccount = new MyAccount();
         AccountDeleter delete = new AccountDeleter();
         AccountUpdater updater = new AccountUpdater();
-        //User user = new User();
         userMain user = new userMain();
         Savings savings = new Savings();
         Needs needs = new Needs();
@@ -56,13 +49,12 @@ public class Main {
         
         //start
         clr.clearScreen();
-
         art.display();
         load.loading();
         clr.clearScreen();
 
+        //displaying intro title
         intro.display(); 
-        //may error sa intro.display
 
         
        mainloop : while (true) {
