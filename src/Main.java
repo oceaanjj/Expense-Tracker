@@ -135,7 +135,7 @@ public class Main {
                                                                 
                                                                     //deletion ng account (sure na ata pag di nag bug letse)
                                                                     delete.deleteAccount();
-
+                                                                    continue mainloop;
                                                                         
 
 

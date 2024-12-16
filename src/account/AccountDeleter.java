@@ -7,14 +7,17 @@ public class AccountDeleter extends AccountEditor {
     private final Confirmation confirm = new Confirmation();
 
     public void deleteAccount() {
-        if (verifier.verifyEmail(this) && verifier.verifyPassword(this)) {
-            if (confirm.confirmAction("Are you sure you want to delete your account? (y/n): ")) {
-                deleteAllFiles();
+        while(true){
+            if (verifier.verifyEmail(this) && verifier.verifyPassword(this)) {
+                if (confirm.confirmAction("Are you sure you want to delete your account? (y/n): ")) {
+                    deleteAllFiles();
+                    return;
+                } else {
+                    System.out.println("Account deletion cancelled.");
+                }
             } else {
-                System.out.println("Account deletion cancelled.");
+                System.out.println("Verification failed. Account deletion aborted.");
             }
-        } else {
-            System.out.println("Verification failed. Account deletion aborted.");
         }
     }
 

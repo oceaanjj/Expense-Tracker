@@ -44,7 +44,7 @@ public class Dashboard{
                     }
                 }
                 if (lineCount <= 3 || !hasData) {
-                    System.out.println("No data found.");
+                    System.out.println("No expense added yet.");
                 }
 
                 System.out.println(); 
