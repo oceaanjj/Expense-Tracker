@@ -23,19 +23,27 @@ public class AccountUpdater extends AccountEditor {
                 continue;
             }
             else{
-                    setNewEmail(newEmail);
-                    if (!verifier.verifyEmail(this) || !verifier.verifyPassword(this)) {
-                        System.out.println("Verification failed. Cancelling email change.");
-                        return;
+                    if (isEmailInUse(newEmail)) {
+                        System.out.println("The new email is already in use. Please try another email.");
+                        changed = false;
+                        continue;
                     }
+                    else{
+                    
+                        setNewEmail(newEmail);
+                        if (!verifier.verifyEmail(this) || !verifier.verifyPassword(this)) {
+                            System.out.println("Verification failed. Cancelling email change.");
+                            return;
+                        }
 
-                    if (confirm.confirmAction("Are you sure you want to change your email? (y/n): ")) {
-                        updateEmail();
-                        return;
-                    }
-                    else {
-                        System.out.println("Changing account email cancelled.");
-                        return;
+                        if (confirm.confirmAction("Are you sure you want to change your email? (y/n): ")) {
+                            updateEmail();
+                            return;
+                        }
+                        else {
+                            System.out.println("Changing account email cancelled.");
+                            return;
+                        }
                     }
             }   
         }

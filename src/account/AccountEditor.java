@@ -6,11 +6,7 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * KULANG  :
- * KAPAG NAGUPDATE NG EMAIL DAPAT MAG AASK AGAIN YUNG SYSTEM IF YUNG NEW EMAIL 
- * IS MAY DUPLICATION
- */
+
 public class AccountEditor {
     private String email;
     private String password;
@@ -148,4 +144,11 @@ public class AccountEditor {
             System.out.println("Can't change Income. Please try again.");
         }
     }
+
+    public boolean isEmailInUse(String email) {
+        String directoryPath = System.getProperty("user.dir") + "/src/database/accounts";
+        File file = new File(directoryPath, email + ".txt");
+        return file.exists();
+    }
+    
 }
