@@ -34,6 +34,10 @@ public class Registration {
         saveAccountDetails();
     }
 
+
+
+
+
     private String getEmail() {
         while (true) {
             System.out.print("Enter your email: ");
