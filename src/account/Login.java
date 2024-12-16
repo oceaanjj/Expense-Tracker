@@ -1,5 +1,7 @@
 package account;
 
+import display.ClearScreen;
+import display.LoginDisplay;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -12,12 +14,19 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import user.Needs;
 
+//needs a hello + nickname
+
 public class Login {
+    public static final String GREEN_TEXT = "\u001B[32m"; 
+    public static final String RESET = "\u001B[0m";
+    public static final String ORANGE_TEXT = "\u001B[38;5;214m";
     private String email;
     private String password;
     private Scanner s;
     boolean loggedIn = false;
     Needs needs = new Needs();
+    ClearScreen clr = new ClearScreen();
+    LoginDisplay loginDisplay = new LoginDisplay();
 
     public Login() {
         s = new Scanner(System.in);
@@ -43,24 +52,32 @@ public class Login {
     public boolean userLogin() {
         while (true) {
             try {
+                clr.clearScreen();
+                loginDisplay.display();
                 email = "";
-                System.out.print("Enter Email: ");
+                System.out.print(GREEN_TEXT + "\t\t\t\t\t\t\t\tEnter Email: " + RESET);
                 email = s.nextLine().trim();
                 setEmail(email);  
                 break; 
             } catch (Exception e) {
-                System.out.println("Invalid input for email. Please try again.");
+                clr.clearScreen();
+                loginDisplay.display();
+                System.out.println(ORANGE_TEXT + "\t\t\t\t\t\t\t\t* Invalid input for email. Please try again." + RESET);
             }
         }
 
         while (true) {
             try {
-                System.out.print("Enter Password: ");
+                clr.clearScreen();
+                loginDisplay.display();
+                System.out.print(GREEN_TEXT + "\t\t\t\t\t\t\t\tEnter Password: " + RESET);
                 password = s.nextLine().trim();
                 setPassword(password);  
                 break;  
             } catch (Exception e) {
-                System.out.println("Invalid input for password. Please try again.");
+                clr.clearScreen();
+                loginDisplay.display();
+                System.out.println(ORANGE_TEXT + "\t\t\t\t\t\t\t\t* Invalid input for password. Please try again." + RESET);
             }
         }
 
@@ -79,7 +96,9 @@ public class Login {
 
             
             if (!file.exists()) {
-                System.out.println("Login failed: Account does not exist.");
+                clr.clearScreen();
+                loginDisplay.display();
+                System.out.println(ORANGE_TEXT + "\t\t\t\t\t\t\t\t* Login failed : Account does not exist." + RESET);
                 return loggedIn = false;
             }
 
@@ -102,20 +121,29 @@ public class Login {
                     setEmail(email);
                     setPassword(password);
                     checkDueDates(userTxtFile);
-                    System.out.println("Login successful!");
+                    clr.clearScreen();
+                    loginDisplay.display();
+                    System.out.println(GREEN_TEXT + "\t\t\t\t\t\t\t\t\t\tLogin successful!"  + RESET);
+                    //needs a hello + nickname
                     return loggedIn = true;
                 }
                 else {
-                    System.out.println("Login failed: Incorrect email or password.");
+                    clr.clearScreen();
+                    loginDisplay.display();
+                    System.out.println(ORANGE_TEXT + "\t\t\t\t\t\t\t\tLogin failed: Incorrect email or password." + RESET);
                     return loggedIn = false;
                 }
             }
             else {
-                System.out.println("Account file is corrupted or incomplete.");
+                clr.clearScreen();
+                loginDisplay.display();
+                System.out.println(ORANGE_TEXT + "\t\t\t\t\t\t\t\tAccount file is corrupted or incomplete." +  RESET);
                 return loggedIn = false;
             }
         } catch (IOException e) {
-            System.out.println("Login failed: Error occurred.");
+            clr.clearScreen();
+            loginDisplay.display();
+            System.out.println(ORANGE_TEXT + "\t\t\t\t\t\t\t\tLogin failed: Error occurred." + RESET);
             return loggedIn = false;
         }
     }
@@ -143,13 +171,13 @@ public class Login {
     
 
                     if (dueMonthDay.equals(todayMonthDay)) {
-                        System.out.println("Reminder: " + dueDates[i - 4] + " payment is due today!");
+                        System.out.println(ORANGE_TEXT + "\t\t\t\t\t\t\t\t* REMINDER : " + dueDates[i - 4] + " payment is due today!" + RESET);
                     }
                     else if (daysUntilDue > 0 && daysUntilDue <= 7) {
-                        System.out.println("Reminder: " + dueDates[i - 4] + " payment is due in " + daysUntilDue + " day(s).");
+                        System.out.println(ORANGE_TEXT + "\t\t\t\t\t\t\t\t* REMINDER : " + dueDates[i - 4] + " payment is due in " + daysUntilDue + " day(s)." + RESET);
                     }
                 } catch (DateTimeParseException e) {
-                    System.out.println("Warning: Invalid due date format for " + dueDates[i - 4]);
+                    System.out.println(ORANGE_TEXT + "* WARNING: Invalid due date format for " + dueDates[i - 4] + ". Please update your due dates." + RESET);
                 }
             }
         }
