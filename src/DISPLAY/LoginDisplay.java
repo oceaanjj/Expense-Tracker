@@ -7,8 +7,8 @@ public class LoginDisplay extends menu {
 
     @Override
     public void display() {
-        System.out.println(YELLOW + "\t\t\t\t\t\t\t\t __        ______     _______        __  .__   __. " + RESET);
-        System.out.println(YELLOW + "\t\t\t\t\t\t\t\t|  |      /  __  \\   /  _____|      |  | |  \\ |  | " + RESET);
+        System.out.println(YELLOW + "\t\t\t\t\t\t\t\t __        ______     ______         __  .__   __. " + RESET);
+        System.out.println(YELLOW + "\t\t\t\t\t\t\t\t|  |      /  __  \\   /  ____|       |  | |  \\ |  | " + RESET);
         System.out.println(YELLOW + "\t\t\t\t\t\t\t\t|  |     |  |  |  | |  |  __        |  | |   \\|  | " + RESET);
         System.out.println(YELLOW + "\t\t\t\t\t\t\t\t|  |     |  |  |  | |  | |_ |       |  | |  . `  | " + RESET);
         System.out.println(YELLOW + "\t\t\t\t\t\t\t\t|  `----.|  `--'  | |  |__| |       |  | |  |\\   | " + RESET);
