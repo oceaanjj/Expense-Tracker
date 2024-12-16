@@ -1,6 +1,0 @@
--------------------------------------------
-| Detail            | Amount          | Info                                     |
--------------------------------------------
-| Food              | 90.00           | fries                                    |
-| Food              | 900.00          | chicken fillet mushroom                  |
-| Transportation    | 10.00           | taxi                                     |  
