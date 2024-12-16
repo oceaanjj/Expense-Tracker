@@ -58,10 +58,11 @@ public class Main {
 
         
        mainloop : while (true) {
-
+            clr.clearScreen();
             //while (true) { 
                 mainmenu.display();
-                System.out.print("\n   Enter choice : ");
+
+                System.out.print("\n\t\t\t\t\t\t\t   Enter choice : ");
                 
                 try {
                     choice = s.nextInt();
