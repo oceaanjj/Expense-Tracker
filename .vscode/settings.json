@@ -1,14 +1,8 @@
 {
     "java.project.sourcePaths": ["src"],
     "java.project.outputPath": "bin",
-    
-        "java.project.referencedLibraries": [
-            "lib/itextpdf-5.5.13.4.jar"
-        ]
-      
-      
-
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar"
+    ],
+    "java.debug.settings.onBuildFailureProceed": true
 }
-
-
-
