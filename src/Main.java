@@ -43,11 +43,17 @@ public class Main {
         Savings savings = new Savings();
         Needs needs = new Needs();
         Wants wants = new Wants();
+<<<<<<< HEAD
+        Dashboard dashboard = new Dashboard();
+
+        
+=======
+>>>>>>> origin/360
 
         // start
         clr.clearScreen();
         art.display();
-        load.loading();
+        //load.loading();
         clr.clearScreen();
 
         //displaying intro title
@@ -78,6 +84,61 @@ public class Main {
                     register.startRegistration();
                     break;
 
+<<<<<<< HEAD
+                            case 2: 
+                            //login
+                                //clr.clearScreen();
+                                
+                                //System.out.println("Login");
+                           
+                                                                                           
+                                if (login.userLogin()) {
+                                        savings.setEmail(login.getEmail());
+                                        needs.setEmail(login.getEmail());
+                                        wants.setEmail(login.getEmail());
+                                        dashboard.setEmail(login.getEmail());
+
+                                        login.displayUserName(login.getEmail());
+                                        
+                                        
+                                                    
+                                                                                 
+                                            UserMainMenu : while (true) {
+                                                clr.clearScreen();
+                                                System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n");
+                                                login.displayUserName(login.getEmail());
+                                                
+                                                userMenu.display();
+                                                System.out.print("\n\t\t\t\t\t\t\t     Enter choice : ");
+                                                int userChoice = s.nextInt();
+
+                                                switch(userChoice){
+                                                    case 1:
+                                                        /*myAccountmenu :*/ while (true) {
+                                                            clr.clearScreen();
+                                                            myAccount.display();
+                                                            System.out.print("\n\t\t\t\t\t\t\t   Enter choice : ");
+                                                            int accountChoice = s.nextInt();
+                                                            switch(accountChoice){
+
+                                                                case 1:
+                                                                clr.clearScreen();
+                                                                    //change email (medyo done)                                
+                                                                    updater.changeEmail();
+                                                                    break;    
+
+                                                                case 2:
+                                                                clr.clearScreen();
+                                                                    //change password (medyo done)
+                                                                    updater.changePassword();
+                                                                    break;
+                
+                                                                case 3:
+                                                                clr.clearScreen();
+                                                                    //change monthly income (medyo done)
+                                                                    updater.changeIncome();
+                                                                    break;
+=======
                 case 2:
                     // login
                     clr.clearScreen();
@@ -92,6 +153,7 @@ public class Main {
                         // System.out.println(savings.getEmail());
 
                         // boolean loginStatus = login.userLogin(login.getEmail(), login.getPassword());
+>>>>>>> origin/360
 
                         UserMainMenu: while (true) {
                             userMenu.display();
@@ -116,7 +178,20 @@ public class Main {
                                                 updater.changePassword();
                                                 break;
 
+<<<<<<< HEAD
+                                                                case 7:
+                                                                
+                                                                    continue UserMainMenu;
+                                                                default:
+                                                                    System.out.println("\n\t\t\t\t\t\t\t* Invalid choice. Please select a valid option.");
+                                                                    break;
+                                                            }//switch case of my accountAccount
+                                                        } //my account end loop
+                                                        
+                                                        
+=======
                                             case 3:
+>>>>>>> origin/360
 
                                                 // change monthly income (medyo done)
                                                 updater.changeIncome();
@@ -144,6 +219,26 @@ public class Main {
                                                 // read data sharing agreement
                                                 break;
 
+<<<<<<< HEAD
+                                                    default:
+                                                        System.out.println("\n\t\t\t\t\t\t\t* Invalid choice. Please select a valid option.");
+                                                        break;
+                                                    }
+                                                
+                                                } //end of user main menu loop
+
+                                            }//login status
+                                    else
+                                    {
+                                        break;
+                                        
+                                    }
+                            
+
+                                            
+                            
+                            
+=======
                                             case 6:
                                                 /**
                                                  * 
@@ -168,6 +263,7 @@ public class Main {
                                                 break;
                                         }// switch case of my accountAccount
                                     } // my account end loop
+>>>>>>> origin/360
 
                                 case 2:
                                     // System.out.println(savings.getEmail());
