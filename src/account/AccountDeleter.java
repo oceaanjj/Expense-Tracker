@@ -3,24 +3,28 @@ package account;
 import java.io.File;
 
 public class AccountDeleter extends AccountEditor {
+    public static final String GREEN_TEXT = "\u001B[32m"; 
+    public static final String RESET = "\u001B[0m";
+    public static final String ORANGE_TEXT = "\u001B[38;5;214m";
     private final Verification verifier = new Verification();
     private final Confirmation confirm = new Confirmation();
 
     public void deleteAccount() {
         while(true){
             if (verifier.verifyEmail(this) && verifier.verifyPassword(this)) {
-                if (confirm.confirmAction("Are you sure you want to delete your account? (y/n): ")) {
+                if (confirm.confirmAction(ORANGE_TEXT + "\t\t\t\t\t\t\t\t* Are you sure you want to delete your account? (y/n): " + RESET)) {
                     deleteAllFiles();
                     return;
                 } else {
-                    System.out.println("Account deletion cancelled.");
+                    System.out.println(ORANGE_TEXT + "\t\t\t\t\t\t\t\t* Account deletion cancelled." + RESET);
                 }
             } else {
-                System.out.println("Verification failed. Account deletion aborted.");
+                System.out.println(ORANGE_TEXT + "\t\t\t\t\t\t\t\t* Verification failed. Account deletion aborted." + RESET);
             }
         }
     }
 
+    //path to the files to be deleted (accounts, needs, savings, wants)
     private void deleteAllFiles() {
         String baseDir = System.getProperty("user.dir");
         deleteSingleFile(baseDir + "/src/database/accounts/" + getEmail() + ".txt");

@@ -6,6 +6,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
+    /*
+        This class is used to verify the email and password of the user
+        (if alam nila yung password and email na ginaagamit nila for security purposes)
+        mostly used in our account updater (MyAccount)
+    */
+
 public class Verification {  
     private final Scanner scanner = new Scanner(System.in);
 

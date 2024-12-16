@@ -11,6 +11,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import display.Date;
 
+        /*
+            This class is used to start the expense tracker
+            dito lahat nilalagay lahat ng classes na ginawa natin under user folder
+        */
 public class userMain {
 
     private String email;
