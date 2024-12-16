@@ -44,13 +44,14 @@ public class Main {
         Needs needs = new Needs();
         Wants wants = new Wants();
         Dashboard dashboard = new Dashboard();
+
         
 
         
         //start
         clr.clearScreen();
         art.display();
-        load.loading();
+        //load.loading();
         clr.clearScreen();
 
         //displaying intro title
@@ -83,44 +84,54 @@ public class Main {
 
                             case 2: 
                             //login
-                                clr.clearScreen();
+                                //clr.clearScreen();
                                 
-                                System.out.println("Login");
+                                //System.out.println("Login");
+                           
                                                                                            
-                                    if (login.userLogin() == true) {
+                                if (login.userLogin()) {
                                         savings.setEmail(login.getEmail());
                                         needs.setEmail(login.getEmail());
                                         wants.setEmail(login.getEmail());
                                         dashboard.setEmail(login.getEmail());
-                                        //System.out.println(savings.getEmail());
+
+                                        login.displayUserName(login.getEmail());
+                                        
+                                        
                                                     
-                                                
-                                        //boolean loginStatus = login.userLogin(login.getEmail(), login.getPassword());                                                  
+                                                                                 
                                             UserMainMenu : while (true) {
+                                                clr.clearScreen();
+                                                System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n");
+                                                login.displayUserName(login.getEmail());
+                                                
                                                 userMenu.display();
-                                                System.out.println("Enter choice: ");
+                                                System.out.print("\n\t\t\t\t\t\t\t     Enter choice : ");
                                                 int userChoice = s.nextInt();
 
                                                 switch(userChoice){
                                                     case 1:
                                                         /*myAccountmenu :*/ while (true) {
+                                                            clr.clearScreen();
                                                             myAccount.display();
-                                                            System.out.println("Enter choice: ");
+                                                            System.out.print("\n\t\t\t\t\t\t\t   Enter choice : ");
                                                             int accountChoice = s.nextInt();
                                                             switch(accountChoice){
 
                                                                 case 1:
+                                                                clr.clearScreen();
                                                                     //change email (medyo done)                                
                                                                     updater.changeEmail();
                                                                     break;    
 
                                                                 case 2:
+                                                                clr.clearScreen();
                                                                     //change password (medyo done)
                                                                     updater.changePassword();
                                                                     break;
                 
                                                                 case 3:
-                                                                    
+                                                                clr.clearScreen();
                                                                     //change monthly income (medyo done)
                                                                     updater.changeIncome();
                                                                     break;
@@ -170,7 +181,7 @@ public class Main {
                                                                 
                                                                     continue UserMainMenu;
                                                                 default:
-                                                                    System.out.println("Invalid choice. Please select a valid option.");
+                                                                    System.out.println("\n\t\t\t\t\t\t\t* Invalid choice. Please select a valid option.");
                                                                     break;
                                                             }//switch case of my accountAccount
                                                         } //my account end loop
@@ -194,7 +205,7 @@ public class Main {
                                                     continue mainloop;
 
                                                     default:
-                                                        System.out.println("Invalid choice. Please select a valid option.");
+                                                        System.out.println("\n\t\t\t\t\t\t\t* Invalid choice. Please select a valid option.");
                                                         break;
                                                     }
                                                 
@@ -203,11 +214,13 @@ public class Main {
                                             }//login status
                                     else
                                     {
-                                        System.out.println("Invalid email or password. Please try again.");
+                                        break;
+                                        
                                     }
+                            
 
                                             
-                            break;
+                            
                             
 
                             case 3: 

@@ -20,6 +20,7 @@ public class Login {
     public static final String GREEN_TEXT = "\u001B[32m"; 
     public static final String RESET = "\u001B[0m";
     public static final String ORANGE_TEXT = "\u001B[38;5;214m";
+    public static final String YELLOW_TEXT = "\u001B[33m";
     private String email;
     private String password;
     private Scanner s;
@@ -50,103 +51,111 @@ public class Login {
 
 
     public boolean userLogin() {
+        
         while (true) {
             try {
                 clr.clearScreen();
                 loginDisplay.display();
+                
                 email = "";
-                System.out.print(GREEN_TEXT + "\t\t\t\t\t\t\t\tEnter Email: " + RESET);
+                System.out.print(GREEN_TEXT + "\t\t\t\t\t\t\t\t\tEnter Email: " + RESET);
                 email = s.nextLine().trim();
-                setEmail(email);  
-                break; 
-            } catch (Exception e) {
-                clr.clearScreen();
-                loginDisplay.display();
-                System.out.println(ORANGE_TEXT + "\t\t\t\t\t\t\t\t* Invalid input for email. Please try again." + RESET);
-            }
-        }
-
-        while (true) {
-            try {
-                clr.clearScreen();
-                loginDisplay.display();
-                System.out.print(GREEN_TEXT + "\t\t\t\t\t\t\t\tEnter Password: " + RESET);
+                setEmail(email);
+                
+                System.out.print(GREEN_TEXT + "\t\t\t\t\t\t\t\t\tEnter Password: " + RESET);
                 password = s.nextLine().trim();
-                setPassword(password);  
-                break;  
+                setPassword(password);
+    
+           
+                if (validateLogin(getEmail(), getPassword())) {
+                    return true; 
+                } else {
+                    clr.clearScreen();
+                    loginDisplay.display();
+                    System.out.println(ORANGE_TEXT + "\t\t\t\t\t\t\t\t    * Login failed: Incorrect email or password. " + RESET);
+                    System.out.print("\t\t\t\t\t\t\t\t       do you want to try again? (yes/no) : ");
+                    String tryAgain = s.nextLine();
+
+                        if (tryAgain.equalsIgnoreCase("no")) {
+                            return false;
+                        }
+                        else if (tryAgain.equalsIgnoreCase("yes")) {
+                            continue;
+                        }
+                }
             } catch (Exception e) {
                 clr.clearScreen();
                 loginDisplay.display();
-                System.out.println(ORANGE_TEXT + "\t\t\t\t\t\t\t\t* Invalid input for password. Please try again." + RESET);
+                System.out.println(ORANGE_TEXT + "\t\t\t\t\t\t\t\t* An error occurred during login. Please try again." + RESET);
             }
         }
-
-    
-       validateLogin(email, password);
-       return loggedIn;
     }
+    
+    
 
     
     private boolean validateLogin(String email, String password) {
         try {
-            
-            
             String directory = System.getProperty("user.dir") + "/src/database/accounts";
             File file = new File(directory, email + ".txt");
+    
 
-            
             if (!file.exists()) {
                 clr.clearScreen();
                 loginDisplay.display();
-                System.out.println(ORANGE_TEXT + "\t\t\t\t\t\t\t\t* Login failed : Account does not exist." + RESET);
-                return loggedIn = false;
+                System.out.println(ORANGE_TEXT + "\t\t\t\t\t\t\t\t* Login failed: Account does not exist." + RESET);
+                return false;
             }
-
-            
+    
+        
             ArrayList<String> userTxtFile = new ArrayList<>();
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    userTxtFile.add(line.trim());
+                    userTxtFile.add(line.trim()); 
                 }
             }
-
-          
-            if (userTxtFile.size() >= 2) {
-                String fileEmail = userTxtFile.get(0);
-                String filePassword = userTxtFile.get(1);
-
-                if (fileEmail.equals(email) && filePassword.equals(password)) {
-                   
-                    setEmail(email);
-                    setPassword(password);
-                    checkDueDates(userTxtFile);
-                    clr.clearScreen();
-                    loginDisplay.display();
-                    System.out.println(GREEN_TEXT + "\t\t\t\t\t\t\t\t\t\tLogin successful!"  + RESET);
-                    //needs a hello + nickname
-                    return loggedIn = true;
-                }
-                else {
-                    clr.clearScreen();
-                    loginDisplay.display();
-                    System.out.println(ORANGE_TEXT + "\t\t\t\t\t\t\t\tLogin failed: Incorrect email or password." + RESET);
-                    return loggedIn = false;
-                }
-            }
-            else {
+    
+  
+            if (userTxtFile.size() < 2) {
                 clr.clearScreen();
                 loginDisplay.display();
-                System.out.println(ORANGE_TEXT + "\t\t\t\t\t\t\t\tAccount file is corrupted or incomplete." +  RESET);
-                return loggedIn = false;
+                System.out.println(ORANGE_TEXT + "\t\t\t\t\t\t\t\t* Account file is corrupted or incomplete." + RESET);
+                return false;  
             }
+    
+     
+            String fileEmail = userTxtFile.get(0);
+            String filePassword = userTxtFile.get(1);
+    
+        
+    
+            if (fileEmail.equals(email) && filePassword.equals(password)) {
+                setEmail(email);
+                setPassword(password);
+                checkDueDates(userTxtFile);
+                clr.clearScreen();
+                loginDisplay.display();
+                System.out.println(GREEN_TEXT + "\t\t\t\t\t\t\t\t\t\tLogin successful!" + RESET);
+                System.out.println("\n\t\t\t\t\t\t\t\t\t   press enter to continue....");
+                s.nextLine();
+                return true;  
+            } else {
+                clr.clearScreen();
+                loginDisplay.display();
+                System.out.println(ORANGE_TEXT + "\t\t\t\t\t\t\t\t* Login failed: Incorrect email or password." + RESET);
+                return false;  
+            }
+    
         } catch (IOException e) {
             clr.clearScreen();
             loginDisplay.display();
-            System.out.println(ORANGE_TEXT + "\t\t\t\t\t\t\t\tLogin failed: Error occurred." + RESET);
-            return loggedIn = false;
+            System.out.println(ORANGE_TEXT + "\t\t\t\t\t\t\t\t* Login failed: Error occurred." + RESET);
+            return false;  
         }
     }
+    
+    
 
 
 
@@ -182,6 +191,33 @@ public class Login {
             }
         }
     }
+
+    public void displayUserName(String email) {
+        String directory = System.getProperty("user.dir") + "/src/database/accounts";
+        File file = new File(directory, getEmail() + ".txt");
+        
+        if (!file.exists()) {
+            System.out.println(ORANGE_TEXT + "* Error: Account file does not exist for email: " + email + RESET);
+            return;
+        }
+    
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String name = null;
+            for (int i = 0; i < 3; i++) {
+                name = reader.readLine();
+                if (name == null) {
+                    System.out.println(ORANGE_TEXT + "* Error: Account file does not contain enough lines." + RESET);
+                    return;
+                }
+            }
+            
+            // Display the name from line 3
+            System.out.println(YELLOW_TEXT + "\t\t\t\t\t\t\t\t\t\tWelcome, " + name + "!" + RESET);
+        } catch (IOException e) {
+            System.out.println(ORANGE_TEXT + "* Error: Unable to read the account file for email: " + email + RESET);
+        }
+    }
+    
     
 
     
