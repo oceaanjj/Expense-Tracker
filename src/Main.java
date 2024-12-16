@@ -91,6 +91,7 @@ public class Main {
                             case 2: 
                             //login
                                 clr.clearScreen();
+                                
                                 System.out.println("Login");
                                                                                            
                                     if (login.userLogin() == true) {
@@ -191,6 +192,7 @@ public class Main {
 
 
                                                     case 3:
+                                                    //dashboard
                                                     dashboard.displayDashboard();
                                                     break;
 
@@ -216,7 +218,7 @@ public class Main {
                             
 
                             case 3: 
-                                System.out.println("\n\tThank you for using our application!");
+                                System.out.println("\n\tThank you for using our system !");
                                 break mainloop;
 
                             default:
