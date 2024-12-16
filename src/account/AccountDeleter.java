@@ -21,6 +21,7 @@ public class AccountDeleter extends AccountEditor {
         }
     }
 
+    //path to the files to be deleted (accounts, needs, savings, wants)
     private void deleteAllFiles() {
         String baseDir = System.getProperty("user.dir");
         deleteSingleFile(baseDir + "/src/database/accounts/" + getEmail() + ".txt");

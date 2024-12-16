@@ -39,7 +39,7 @@ public class Login {
         return password;
     }
 
-    // Method to handle user login with input prompts
+
     public boolean userLogin() {
         while (true) {
             try {

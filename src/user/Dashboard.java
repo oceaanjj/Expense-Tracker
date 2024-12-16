@@ -2,6 +2,13 @@ package user;
 
 import java.io.*;
 
+
+        /*
+            This class is used to display the dashboard of the user
+            (where they can see their expenses and the existing tables in their
+            savings, needs and wants
+            (nag re-read ng files to display the contents)
+        */
 public class Dashboard{
     private String email;
 

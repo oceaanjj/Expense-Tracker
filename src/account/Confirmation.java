@@ -2,6 +2,9 @@ package account;
 
 import java.util.Scanner;
 
+    /*
+        This class is used to confirm if the user wan to continue their action
+    */
 public class Confirmation {
     private final Scanner scanner = new Scanner(System.in);
 
