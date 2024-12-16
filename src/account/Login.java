@@ -43,6 +43,7 @@ public class Login {
     public boolean userLogin() {
         while (true) {
             try {
+                email = "";
                 System.out.print("Enter Email: ");
                 email = s.nextLine().trim();
                 setEmail(email);  

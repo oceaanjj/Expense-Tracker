@@ -14,6 +14,7 @@ public class Savings {
     /*
      * KULANG : 
      * INPUTS TRY CATCH
+     * CHECK THE SCANNERS AND PRINT
      */
     private String email;
     private Scanner s = new Scanner(System.in);
@@ -22,8 +23,8 @@ public class Savings {
     private String frequency;
     LocalDate today = LocalDate.now();
     LocalDate endDate;
-    double savedSoFar;
-    String parts[];
+    //double savedSoFar;
+    //String parts[];
 
     public void setEmail(String email) {
         this.email = email;
@@ -57,44 +58,52 @@ public class Savings {
         return frequency;
     }
 
+
     public void addSavings() {
         while (true) {
             System.out.println("TRACK YOUR SAVINGS");
             System.out.println("[1] START NEW SAVINGS");
             final String savingsFolderPath = System.getProperty("user.dir") + "/src/database/savings";
-        File savingsFile = new File(savingsFolderPath, email + ".txt");
-
-        if (savingsFile.exists() && savingsFile.length() > 0) {
+            File savingsFile = new File(savingsFolderPath, email + ".txt");
         
-            System.out.println("[2] ADD TO EXISTING SAVINGS");
-        }
-            System.out.println("[3] BACK");
+            if (savingsFile.exists() && savingsFile.length() > 0) {
+                System.out.println("[2] ADD TO EXISTING SAVINGS");
+                System.out.println("[3] DELETE A SAVINGS");
+            }
+            System.out.println("[4] BACK");
             System.out.print("Enter your choice: ");
             int choice = s.nextInt();
-
+        
             switch (choice) {
                 case 1:
                     startNewSavings();
                     break;
                 case 2:
-                if (savingsFile.exists() && savingsFile.length() > 0) {
-                    addToExistingSavings();
-                } else {
-                    System.out.println("No existing savings found. Please start a new savings entry.");
-                }
-                break;
-                 
+                    if (savingsFile.exists() && savingsFile.length() > 0) {
+                        addToExistingSavings();
+                    } else {
+                        System.out.println("No existing savings found. Please start a new savings entry.");
+                    }
+                    break;
                 case 3:
+                    if (savingsFile.exists() && savingsFile.length() > 0) {
+                        deleteSavings();
+                    } else {
+                        System.out.println("No savings entries found to delete.");
+                    }
+                    break;
+                case 4:
                     return; 
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
         }
     }
+    
 
     public void startNewSavings() {
         s.nextLine(); 
-        System.out.print("Enter Savings Name (Ex. Tuition): ");
+        System.out.print("Enter Savings Name (e.g. Tuition): ");
         String savingsName = s.nextLine().trim();
         setName(savingsName);
 
@@ -144,6 +153,8 @@ public class Savings {
         saveSavings(0.0); 
     }
 
+
+
     public void saveSavings(double savedSoFar) {
         final String savingsFolderPath = System.getProperty("user.dir") + "/src/database/savings";
         File savingsFolder = new File(savingsFolderPath);
@@ -154,33 +165,20 @@ public class Savings {
             return;
         }
     
-        try {
-         
-            if (savingsFile.exists()) {
-                try (BufferedReader reader = new BufferedReader(new FileReader(savingsFile))) {
-                    String firstLine = reader.readLine();
-                  
-                }
-            }
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(savingsFile, true))) {
+            // Calculate remaining balance
+            double remaining = getGoal() - savedSoFar;
+            String status = remaining <= 0 ? "Goal Achieved" : "On Going";
     
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(savingsFile, true))) {
-                
-                String status;
-                if (savedSoFar >= getGoal()) {
-                    status = "Goal Achieved";
-                } else {
-                    status = "On Going";
-                }
-        
-                
-                writer.write(String.format("| %-20s | %-15.2f | %-15.2f | %-15s | %-15s | %-15s |\n",
-                        getName(), getGoal(), savedSoFar, getFrequency(), endDate, status));
-                System.out.println("Savings entry saved successfully!");
-            }
+            // Save the entry with proper formatting, including the remaining balance
+            writer.write(String.format("| %-20s | %-15.2f | %-16.2f | %-15s | %-15s | %-17.2f | %-12s |\n",
+                    getName(), getGoal(), savedSoFar, getFrequency(), endDate, Math.max(0, remaining), status));
+            System.out.println("Savings entry saved successfully!");
         } catch (IOException e) {
             System.out.println("Failed to save savings entry. Please try again.");
         }
     }
+    
     
 
 
@@ -204,18 +202,17 @@ public class Savings {
             return;
         }
     
-   
         List<String> savingsNames = new ArrayList<>();
         List<String[]> savingsData = new ArrayList<>();
         for (String line : fileLines) {
             if (line.startsWith("+") || line.startsWith("| Savings Name")) {
-                
-                continue;
+                continue; // Skip header lines
             }
             if (line.startsWith("|")) {
                 String[] parts = line.split("\\|");
                 String savingsName = parts[1].trim();
-                String status = parts[6].trim(); 
+                String status = parts[6].trim();
+    
                 if (!"Goal Achieved".equalsIgnoreCase(status)) {
                     savingsNames.add(savingsName);
                     savingsData.add(parts);
@@ -224,11 +221,10 @@ public class Savings {
         }
     
         if (savingsNames.isEmpty()) {
-            System.out.println("All savings goals are achieved or no savings entries found.");
+            System.out.println("No ongoing savings goals to update. Returning to the menu.");
             return;
         }
     
-
         System.out.println("Choose a savings to add to:");
         for (int i = 0; i < savingsNames.size(); i++) {
             System.out.println("[" + (i + 1) + "] " + savingsNames.get(i));
@@ -242,28 +238,37 @@ public class Savings {
         }
     
         String selectedSavings = savingsNames.get(choice - 1);
+        String[] selectedSavingsData = savingsData.get(choice - 1);
+    
+        double goal = Double.parseDouble(selectedSavingsData[2].trim());
+        double savedSoFar = Double.parseDouble(selectedSavingsData[3].trim());
+        double remaining = goal - savedSoFar;
+    
+        // Check if goal is already achieved
+        if (remaining <= 0) {
+            System.out.println("You already completed this savings goal. Returning to the menu.");
+            return;
+        }
+    
         System.out.print("Enter the amount to add to " + selectedSavings + ": ");
         double amountToAdd = s.nextDouble();
     
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(savingsFile))) {
             for (String line : fileLines) {
                 if (line.contains(selectedSavings)) {
-                    String[] parts = line.split("\\|");
-                    double goal = Double.parseDouble(parts[2].trim());
-                    double savedSoFar = Double.parseDouble(parts[3].trim());
                     savedSoFar += amountToAdd;
-                    double remaining = goal - savedSoFar;
+                    remaining = goal - savedSoFar;
     
                     // Determine status
-                    String status = remaining <= 0 ? "Goal Achieved" : "On Going";
+                    String newStatus = remaining <= 0 ? "Goal Achieved" : "On Going";
     
                     // Update the table row
-                    line = String.format("| %-20s | %-15.2f | %-15.2f | %-15s | %-15s | %-17.2f | %-12s |",
-                            selectedSavings, goal, savedSoFar, parts[4].trim(), parts[5].trim(), Math.max(0, remaining), status);
+                    line = String.format("| %-20s | %-15.2f | %-16.2f | %-15s | %-15s | %-17.2f | %-12s |",
+                            selectedSavings, goal, savedSoFar, selectedSavingsData[4].trim(), selectedSavingsData[5].trim(), Math.max(0, remaining), newStatus);
     
                     // Print suggestion in console
-                    String endDate = parts[5].trim();
-                    String frequency = parts[4].trim();
+                    String endDate = selectedSavingsData[5].trim();
+                    String frequency = selectedSavingsData[4].trim();
                     System.out.println("Suggestion: " + generateSuggestion(remaining, savedSoFar, frequency, endDate));
                 }
                 writer.write(line + "\n");
@@ -273,6 +278,9 @@ public class Savings {
             System.out.println("Failed to update savings file. Please try again.");
         }
     }
+    
+    
+    
     
 
 
@@ -333,4 +341,68 @@ private String generateSuggestion(double remaining, double savedSoFar, String fr
             System.out.println("Failed to read savings file.");
         }
     }
+
+    public void deleteSavings() {
+        final String savingsFolderPath = System.getProperty("user.dir") + "/src/database/savings";
+        File savingsFile = new File(savingsFolderPath, email + ".txt");
+    
+        if (!savingsFile.exists() || savingsFile.length() == 0) {
+            System.out.println("No savings file found or the file is empty. Nothing to delete.");
+            return;
+        }
+    
+        List<String> fileLines = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(savingsFile))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                fileLines.add(line);
+            }
+        } catch (IOException e) {
+            System.out.println("Failed to read savings file. Please try again.");
+            return;
+        }
+    
+        List<String> savingsNames = new ArrayList<>();
+        for (String line : fileLines) {
+            if (line.startsWith("+") || line.startsWith("| Savings Name")) {
+                continue; // Skip header lines
+            }
+            if (line.startsWith("|")) {
+                String[] parts = line.split("\\|");
+                String savingsName = parts[1].trim();
+                savingsNames.add(savingsName);
+            }
+        }
+    
+        if (savingsNames.isEmpty()) {
+            System.out.println("No savings entries found to delete.");
+            return;
+        }
+    
+        System.out.println("Choose a savings to delete:");
+        for (int i = 0; i < savingsNames.size(); i++) {
+            System.out.println("[" + (i + 1) + "] " + savingsNames.get(i));
+        }
+    
+        System.out.print("Enter your choice: ");
+        int choice = s.nextInt();
+        if (choice < 1 || choice > savingsNames.size()) {
+            System.out.println("Invalid choice.");
+            return;
+        }
+    
+        String selectedSavings = savingsNames.get(choice - 1);
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(savingsFile))) {
+            for (String line : fileLines) {
+                if (!line.contains(selectedSavings)) {
+                    writer.write(line + "\n");
+                }
+            }
+            System.out.println("Savings \"" + selectedSavings + "\" deleted successfully!");
+        } catch (IOException e) {
+            System.out.println("Failed to update savings file after deletion. Please try again.");
+        }
+    }
+    
 }

@@ -18,25 +18,26 @@ import user.userMain;
 public class Main {
     /***
      * KULANG :
-     * TRY AND CATCH SA IBANG PARTS NG CODE NAG EERROR DAPAT KAPAG INVALID INPUT TAS BABALIK, MAGAASK AGAIN
+     * TRY AND CATCH SA IBANG PARTS NG CODE NAG EERROR DAPAT KAPAG INVALID INPUT TAS
+     * BABALIK, MAGAASK AGAIN
      * 
-     * */
-    public static void main (String[] args) {
+     */
+    public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
-        String email, password; //nickname = "";
-        //double income = 0.0;
+        String email, password; // nickname = "";
+        // double income = 0.0;
         int choice;
-        //char agree;
-        //String confirmation;
-        //String registeredEmail, registeredPassword;
-        //String electricityDate, waterDate, rentDate, internetDate;
+        // char agree;
+        // String confirmation;
+        // String registeredEmail, registeredPassword;
+        // String electricityDate, waterDate, rentDate, internetDate;
 
-        //TermsAndConditions terms = new TermsAndConditions();
+        // TermsAndConditions terms = new TermsAndConditions();
         mainmenu mainmenu = new mainmenu();
         LoadingMenu load = new LoadingMenu();
         clearScreen clr = new clearScreen();
         Registration register = new Registration();
-        //TemporaryDatabase db = new TemporaryDatabase();
+        // TemporaryDatabase db = new TemporaryDatabase();
         Login login = new Login();
         asciiArt art = new asciiArt();
         intro intro = new intro();
@@ -44,104 +45,95 @@ public class Main {
         MyAccount myAccount = new MyAccount();
         AccountDeleter delete = new AccountDeleter();
         AccountUpdater updater = new AccountUpdater();
-        //User user = new User();
+        // User user = new User();
         userMain user = new userMain();
         Savings savings = new Savings();
         Needs needs = new Needs();
         Wants wants = new Wants();
 
-        
-        //start
+        // start
         clr.clearScreen();
 
         art.display();
         load.loading();
         clr.clearScreen();
 
-        intro.display(); 
-        //may error sa intro.display
+        intro.display();
+        // may error sa intro.display
 
-        
-       mainloop : while (true) {
+        mainloop: while (true) {
 
-            //while (true) { 
-                mainmenu.display();
-                System.out.print("\n   Enter choice : ");
-                
-                try {
-                    choice = s.nextInt();
-                    s.nextLine(); 
-                } catch (InputMismatchException e) {
-                    System.out.println("Invalid choice. Please enter a valid number.");
+            // while (true) {
+            mainmenu.display();
+            System.out.print("\n   Enter choice : ");
+
+            try {
+                choice = s.nextInt();
+                s.nextLine();
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid choice. Please enter a valid number.");
+                clr.clearScreen();
+                s.nextLine();
+                continue;
+            }
+
+            switch (choice) {
+                // registration
+                case 1:
                     clr.clearScreen();
-                    s.nextLine(); 
-                    continue;
-                }
+                    register.startRegistration();
+                    break;
 
-                        switch (choice) {
-                            //registration
-                            case 1: 
-                                clr.clearScreen();
-                                register.startRegistration();
-                                break;
+                case 2:
+                    // login
+                    clr.clearScreen();
 
-                            case 2: 
-                                //login
-                                clr.clearScreen();
-                                System.out.println("Login");
-                              
+                    System.out.println("Login");
 
-                                
-                                if (login.userLogin() == true) {
-                                    savings.setEmail(login.getEmail());
-                                    needs.setEmail(login.getEmail());
-                                    wants.setEmail(login.getEmail());
-                                    //System.out.println(savings.getEmail());
-                                    
-                                
-                                //boolean loginStatus = login.userLogin(login.getEmail(), login.getPassword());
+                    if (login.userLogin() == true) {
+                        savings.setEmail(login.getEmail());
+                        needs.setEmail(login.getEmail());
+                        wants.setEmail(login.getEmail());
+                        user.setEmail(login.getEmail());
+                        // System.out.println(savings.getEmail());
 
-                                
-                                    
-                                UserMainMenu : while (true) {
-                                    userMenu.display();
-                                    System.out.println("Enter choice: ");
-                                    int userChoice = s.nextInt();
+                        // boolean loginStatus = login.userLogin(login.getEmail(), login.getPassword());
 
+                        UserMainMenu: while (true) {
+                            userMenu.display();
+                            System.out.println("Enter choice: ");
+                            int userChoice = s.nextInt();
 
-                                    switch(userChoice){
-                                        case 1:
-                                        /*myAccountmenu :*/ while (true) {
-                                            myAccount.display();
-                                            System.out.println("Enter choice: ");
-                                            int accountChoice = s.nextInt();
-                                            switch(accountChoice){
+                            switch (userChoice) {
+                                case 1:
+                                    /* myAccountmenu : */ while (true) {
+                                        myAccount.display();
+                                        System.out.println("Enter choice: ");
+                                        int accountChoice = s.nextInt();
+                                        switch (accountChoice) {
 
-                                                case 1:
-                                                    //change email (medyo done)                                
-                                                    updater.changeEmail();
-                                                    break;    
+                                            case 1:
+                                                // change email (medyo done)
+                                                updater.changeEmail();
+                                                break;
 
-                                                case 2:
-                                                    //change password (medyo done)
-                                                    updater.changePassword();
-                                                    break;
-  
-                                                case 3:
-                                                    
-                                                    //change monthly income (medyo done)
-                                                    updater.changeIncome();
-                                                    break;
+                                            case 2:
+                                                // change password (medyo done)
+                                                updater.changePassword();
+                                                break;
 
-                                                case 4:
-                                                
-                                                    //deletion ng account (sure na ata pag di nag bug letse)
-                                                    delete.deleteAccount();
+                                            case 3:
 
-                                                        
+                                                // change monthly income (medyo done)
+                                                updater.changeIncome();
+                                                break;
 
+                                            case 4:
 
-                                                case 5:
+                                                // deletion ng account (sure na ata pag di nag bug letse)
+                                                delete.deleteAccount();
+
+                                            case 5:
                                                 /**
                                                  * 
                                                  * 
@@ -154,11 +146,11 @@ public class Main {
                                                  * 
                                                  * 
                                                  */
-                                                //*ipapagawa kay rain */
-                                                    //read data sharing agreement
-                                                    break;
+                                                // *ipapagawa kay rain */
+                                                // read data sharing agreement
+                                                break;
 
-                                                case 6:
+                                            case 6:
                                                 /**
                                                  * 
                                                  * 
@@ -168,66 +160,59 @@ public class Main {
                                                  * 
                                                  * 
                                                  * 
-                                                 *                                         
+                                                 * 
                                                  */
-                                                //*ipapagawa kay rain */
-                                                    //help
-                                                    break;
+                                                // *ipapagawa kay rain */
+                                                // help
+                                                break;
 
-                                                case 7:
-                                                
-                                                    continue UserMainMenu;
-                                                default:
-                                                    System.out.println("Invalid choice. Please select a valid option.");
-                                                    break;
-                                            }//switch case of my accountAccount
-                                        } //my account end loop
-                                        
-                                        
+                                            case 7:
 
-                                                                             
-                            case 2:
-                            //System.out.println(savings.getEmail());
-                            //savings.addSavings();
-                            user.startExpenseTracker(savings, needs, wants);
-                            break;
+                                                continue UserMainMenu;
+                                            default:
+                                                System.out.println("Invalid choice. Please select a valid option.");
+                                                break;
+                                        }// switch case of my accountAccount
+                                    } // my account end loop
 
+                                case 2:
+                                    // System.out.println(savings.getEmail());
+                                    // savings.addSavings();
+                                    user.startExpenseTracker(savings, needs, wants);
+                                    break;
 
-                                        case 3:
-                                            //insights summary or history of the user expenses keme
-                                            break;
-                                        case 4:
-                                            //logout
-                                            continue mainloop;
-                                        default:
-                                            System.out.println("Invalid choice. Please select a valid option.");
-                                            break;
-                                    }
-                                
-                                } //end of user main menu loop
+                                case 3:
+                                    // dashboard
+                                    //dashboard.displayDashboard();
+                                    break;
 
-                                    }//login status
-                                    else {
-                                        System.out.println("Invalid email or password. Please try again.");
-                                    }
+                                case 4:
+                                    // logout
+                                    continue mainloop;
 
-                            
-                                break;
-                            
+                                default:
+                                    System.out.println("Invalid choice. Please select a valid option.");
+                                    break;
+                            }
 
+                        } // end of user main menu loop
 
+                    } // login status
+                    else {
+                        System.out.println("Invalid email or password. Please try again.");
+                    }
 
+                    break;
 
+                case 3:
+                    System.out.println("\n\tThank you for using our system !");
+                    break mainloop;
 
-                            case 3: 
-                                System.out.println("\n\tThnak you for using our application!");
-                                break mainloop;
-
-                            default:
-                                System.out.println("Invalid choice. Please select a valid option.");
-                                break;
-                        }
-                    //}
-        }//end ng main loop
+                default:
+                    System.out.println("Invalid choice. Please select a valid option.");
+                    break;
+            }
+            // }
+        } // end ng main loop
     }
 }
