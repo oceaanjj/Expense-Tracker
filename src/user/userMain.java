@@ -1,6 +1,10 @@
 package user;
 import java.util.Scanner;
 
+        /*
+            This class is used to start the expense tracker
+            dito lahat nilalagay lahat ng classes na ginawa natin under user folder
+        */
 public class userMain {
 
 

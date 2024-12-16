@@ -2,26 +2,42 @@ package account;
 
 import java.util.Scanner;
 
+
+    /* 
+       this is the class that will be used to update the account details 
+       ( called in our main ) it is connected to Editor ( the one that had access to txt files)
+    */
 public class AccountUpdater extends AccountEditor {
     private final Verification verifier = new Verification();
     private final Scanner s = new Scanner(System.in);
     private final Confirmation confirm = new Confirmation();
 
+    
     public void changeEmail() {
-        System.out.println("Enter your new email:");
-        String newEmail = s.nextLine();
-        setNewEmail(newEmail);
+        while(true){
+            System.out.println("Enter your new email:");
+            String newEmail = s.nextLine();
+        
+            if(!newEmail.contains("@") || !newEmail.contains(".")) {
+                System.out.println(" * REMINDER : Email should contain '@' and '.'");
+                continue;
+            }
+            else{
+                    setNewEmail(newEmail);
+                    if (!verifier.verifyEmail(this) || !verifier.verifyPassword(this)) {
+                        System.out.println("Verification failed. Cancelling email change.");
+                        return;
+                    }
 
-        if (!verifier.verifyEmail(this) || !verifier.verifyPassword(this)) {
-            System.out.println("Verification failed. Cancelling email change.");
-            return;
-        }
-
-        if (confirm.confirmAction("Are you sure you want to change your email? (y/n): ")) {
-            ChangeEmail();
-        }
-        else {
-            System.out.println("Changing account email cancelled.");
+                    if (confirm.confirmAction("Are you sure you want to change your email? (y/n): ")) {
+                        updateEmail();
+                        return;
+                    }
+                    else {
+                        System.out.println("Changing account email cancelled.");
+                        return;
+                    }
+            }   
         }
     }
 
@@ -36,7 +52,7 @@ public class AccountUpdater extends AccountEditor {
         }
 
         if (confirm.confirmAction("Are you sure you want to change your password? (y/n): ")) {
-            ChangePassword();
+            updatePassword();
         }
         else {
             System.out.println("Changing account password cancelled.");
@@ -54,7 +70,7 @@ public class AccountUpdater extends AccountEditor {
         }
 
         if (confirm.confirmAction("Are you sure you want to change your monthly income? (y/n): ")) {
-            ChangeIncome();
+            updateIncome();
         }
         else {
             System.out.println("Changing monthly income cancelled.");
