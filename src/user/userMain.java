@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class userMain {
 
 
-    public void startExpenseTracker(Savings savings, Needs needs) {
+    public void startExpenseTracker(Savings savings, Needs needs, Wants wants) {
         Scanner s = new Scanner(System.in);
         System.out.println("START TRACKING YOUR EXPENSES");
         System.out.println("[1] NEEDS");
@@ -20,7 +20,6 @@ public class userMain {
                 needs.needs();
                 break;
             case 2:
-                Wants wants = new Wants();
                 wants.wants();
                 break;
             case 3:

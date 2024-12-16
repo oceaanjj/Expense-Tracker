@@ -2,7 +2,7 @@ import account.AccountDeleter;
 import account.AccountUpdater;
 import account.Login;
 import account.Registration;
-import display.ClearScreen;
+import display.clearScreen;
 import display.LoadingMenu;
 import display.MyAccount;
 import display.UserMenu;
@@ -12,6 +12,7 @@ import display.mainmenu;
 import java.util.*;
 import user.Needs;
 import user.Savings;
+import user.Wants;
 import user.userMain;
 
 public class Main {
@@ -33,7 +34,7 @@ public class Main {
         //TermsAndConditions terms = new TermsAndConditions();
         mainmenu mainmenu = new mainmenu();
         LoadingMenu load = new LoadingMenu();
-        ClearScreen clr = new ClearScreen();
+        clearScreen clr = new clearScreen();
         Registration register = new Registration();
         //TemporaryDatabase db = new TemporaryDatabase();
         Login login = new Login();
@@ -47,7 +48,7 @@ public class Main {
         userMain user = new userMain();
         Savings savings = new Savings();
         Needs needs = new Needs();
-        
+        Wants wants = new Wants();
 
         
         //start
@@ -94,6 +95,7 @@ public class Main {
                                 if (login.userLogin() == true) {
                                     savings.setEmail(login.getEmail());
                                     needs.setEmail(login.getEmail());
+                                    wants.setEmail(login.getEmail());
                                     //System.out.println(savings.getEmail());
                                     
                                 
@@ -187,7 +189,7 @@ public class Main {
                             case 2:
                             //System.out.println(savings.getEmail());
                             //savings.addSavings();
-                            user.startExpenseTracker(savings, needs);
+                            user.startExpenseTracker(savings, needs, wants);
                             break;
 
 
